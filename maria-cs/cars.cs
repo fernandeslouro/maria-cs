@@ -8,7 +8,8 @@ namespace Mandatory_Assignment_2
         Random rnd = new Random();
         string TypeName;
         public int Price;
-        public int TotalInStockAlpha = rnd.Next(1, 13);
+        // public int TotalInStockAlpha = rnd.Next(1, 13);
+        public int TotalInStockAlpha = 10;
         public int TotalInStockBravo; 
         public int TotalInStockCharlie;
 
@@ -25,7 +26,18 @@ namespace Mandatory_Assignment_2
             Console.WriteLine($"The total value for the Charlie cars is {98000 * my_stock.TotalInStockCharlie}");
         }
 
-
+        public int sellIfStock(int stock_number)
+        {
+            if (stock_number >= 0)
+            {
+                stock_number -= 1;
+            }
+            else
+            {
+                Console.WriteLine("Can't sell his branc of car since there is no stock");
+            }
+            return stock_number;
+        }
         public void OneCarSold(carStock my_stock)
         {
             Console.WriteLine("Select the brand of the sold car (CarAlpha/CarBravo/CarCharlie)");
@@ -33,19 +45,18 @@ namespace Mandatory_Assignment_2
             string type = Console.ReadLine();
             if (type == "A")
             {
-                my_stock.TotalInStockAlpha -= 1;
+                my_stock.TotalInStockAlpha = my_stock.sellIfStock(my_stock.TotalInStockAlpha);
             }
             else if (type == "B")
             {
-                my_stock.TotalInStockBravo -= 1;
+                my_stock.TotalInStockBravo = my_stock.sellIfStock(my_stock.TotalInStockBravo);
             }
             else if (type == "C")
             {
-                my_stock.TotalInStockCharlie -= 1;
+                my_stock.TotalInStockCharlie = my_stock.sellIfStock(my_stock.TotalInStockCharlie);
             }
  
         }
-
         public string GetStockStatus(carStock my_stock)
         {
             int total_stock = my_stock.TotalInStockAlpha +
@@ -92,8 +103,8 @@ namespace Mandatory_Assignment_2
         {
             Processor my_class = new Processor();
             carStock my_stock = new carStock();
-
-            string allowed_user = "jdfl";
+            string further_operations;
+            /* string allowed_user = "jdfl";
             string password = "pw";
 
 
@@ -103,30 +114,41 @@ namespace Mandatory_Assignment_2
             string input_password = Console.ReadLine();
 
 
-            if (input_user == allowed_user & input_password == password)
+            if (input_user == allowed_user & input_password == password) */
+            if (true)
             {
-                int user_choice = my_class.presentOptionsGetChoice();
-                if (user_choice == 1)
+                while (true)
                 {
-                    my_stock.showStockCount(my_stock);
-                }
-                else if (user_choice == 2)
-                {
+                    int user_choice = my_class.presentOptionsGetChoice();
+                    if (user_choice == 1)
+                    {
+                        my_stock.showStockCount(my_stock);
+                    }
+                    else if (user_choice == 2)
+                    {
+                        my_stock.totalValue(my_stock);
+                    }
+                    else if (user_choice == 3)
+                    {
+                        my_stock.OneCarSold(my_stock);
 
-                    my_stock.totalValue(my_stock);
-                }
-                else if (user_choice == 3)
-                {
-                    my_stock.OneCarSold(my_stock);
+                    }
+                    else if (user_choice == 4)
+                    {
+                        Console.WriteLine($"The stock status is {my_stock.GetStockStatus(my_stock)}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice");
+                    }
 
-                }
-                else if (user_choice == 4)
-                {
-                    Console.WriteLine($"The stock status is {my_stock.GetStockStatus(my_stock)}");
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice");
+                    Console.WriteLine("Do you want to perform any further operation (y/N)");
+                    // further_operations = ;
+                    if (Console.ReadLine() != "y")
+                    {
+                        break;
+                    }
+
                 }
             }
             else
