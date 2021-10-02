@@ -94,6 +94,7 @@ namespace Mandatory_Assignment_2
             Console.WriteLine("2.Show total value of each car type for all cars in stock");
             Console.WriteLine("3.Register one car sold");
             Console.WriteLine("4.Get stock status"); //veryLow, Low, Normal, Over
+            Console.WriteLine("5. Quit program");
             int choice = int.Parse(Console.ReadLine());
             return choice;
         }
@@ -103,8 +104,7 @@ namespace Mandatory_Assignment_2
         {
             Processor my_class = new Processor();
             carStock my_stock = new carStock();
-            string further_operations;
-            /* string allowed_user = "jdfl";
+            string allowed_user = "jdfl";
             string password = "pw";
 
 
@@ -114,8 +114,7 @@ namespace Mandatory_Assignment_2
             string input_password = Console.ReadLine();
 
 
-            if (input_user == allowed_user & input_password == password) */
-            if (true)
+            if (input_user == allowed_user & input_password == password) 
             {
                 while (true)
                 {
@@ -137,16 +136,13 @@ namespace Mandatory_Assignment_2
                     {
                         Console.WriteLine($"The stock status is {my_stock.GetStockStatus(my_stock)}");
                     }
+                    else if (user_choice == 5)
+                    {
+                        break;
+                    }
                     else
                     {
                         Console.WriteLine("Invalid choice");
-                    }
-
-                    Console.WriteLine("Do you want to perform any further operation (y/N)");
-                    // further_operations = ;
-                    if (Console.ReadLine() != "y")
-                    {
-                        break;
                     }
 
                 }
