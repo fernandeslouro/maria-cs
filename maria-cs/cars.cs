@@ -10,8 +10,8 @@ namespace Mandatory_Assignment_2
         public int Price;
         // public int TotalInStockAlpha = rnd.Next(1, 13);
         public int TotalInStockAlpha = 10;
-        public int TotalInStockBravo; 
-        public int TotalInStockCharlie;
+        public int TotalInStockBravo = 5;
+        public int TotalInStockCharlie = 4;
 
         public void showStockCount(carStock my_stock)
         {
@@ -38,6 +38,25 @@ namespace Mandatory_Assignment_2
             }
             return stock_number;
         }
+
+        public string HideCharacter()
+        {
+            ConsoleKeyInfo key;
+            string code = "";
+            while (true)
+            {
+                key = Console.ReadKey(true);
+                Console.Write("*");
+                if (key.Key != ConsoleKey.Enter)
+                {
+                    code += key.KeyChar;
+                }
+                else break;
+            }
+            Console.Write("\n");
+            return code;
+        }
+
         public void OneCarSold(carStock my_stock)
         {
             Console.WriteLine("Select the brand of the sold car (CarAlpha/CarBravo/CarCharlie)");
@@ -57,6 +76,8 @@ namespace Mandatory_Assignment_2
             }
  
         }
+
+
         public string GetStockStatus(carStock my_stock)
         {
             int total_stock = my_stock.TotalInStockAlpha +
@@ -88,12 +109,13 @@ namespace Mandatory_Assignment_2
     {
         public int presentOptionsGetChoice()
         {
-            Console.WriteLine("******Here are your options * *****");
-            Console.WriteLine("“Please select the action.");
-            Console.WriteLine("1.Show stock count for each type");
-            Console.WriteLine("2.Show total value of each car type for all cars in stock");
-            Console.WriteLine("3.Register one car sold");
-            Console.WriteLine("4.Get stock status"); //veryLow, Low, Normal, Over
+            Console.Write("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            Console.WriteLine("****** Here are your options ******");
+            Console.WriteLine("Please select the action.");
+            Console.WriteLine("1. Show stock count for each type");
+            Console.WriteLine("2. Show total value of each car type for all cars in stock");
+            Console.WriteLine("3. Register one car sold");
+            Console.WriteLine("4. Get stock status"); //veryLow, Low, Normal, Over
             Console.WriteLine("5. Quit program");
             int choice = int.Parse(Console.ReadLine());
             return choice;
@@ -111,7 +133,7 @@ namespace Mandatory_Assignment_2
             Console.WriteLine("Please provide username to access the BrandX system");
             string input_user = Console.ReadLine();
             Console.WriteLine("Please provide password");
-            string input_password = Console.ReadLine();
+            string input_password = my_stock.HideCharacter();
 
 
             if (input_user == allowed_user & input_password == password) 
@@ -145,17 +167,17 @@ namespace Mandatory_Assignment_2
                         Console.WriteLine("Invalid choice");
                     }
 
+                    Console.Write("\n\n\n");
+                    Console.WriteLine("Press Enter to run again");
+                    Console.ReadLine();
                 }
             }
             else
             {
                 Console.WriteLine("You are not authorized to access this service");
             }
-
             Console.ReadLine();
-
         }
-
 
     }
     public class carClass
