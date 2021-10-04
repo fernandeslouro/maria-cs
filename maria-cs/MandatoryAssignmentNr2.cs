@@ -1,14 +1,12 @@
-﻿
-using System;
+﻿using System;
 
-namespace Mandatory_Assignment_2
+namespace MandatoryAssignmentNr2
 {
     public class carStock
     {
         Random rnd = new Random();
-        string TypeName;
+        //string TypeName;
         public int Price;
-        // public int TotalInStockAlpha = rnd.Next(1, 13);
         public int TotalInStockAlpha = 10;
         public int TotalInStockBravo = 5;
         public int TotalInStockCharlie = 4;
@@ -28,14 +26,9 @@ namespace Mandatory_Assignment_2
 
         public int sellIfStock(int stock_number)
         {
-            if (stock_number >= 0)
-            {
-                stock_number -= 1;
-            }
-            else
-            {
-                Console.WriteLine("Can't sell his branc of car since there is no stock");
-            }
+            if (stock_number >= 0) stock_number -= 1;
+            else Console.WriteLine("Can't sell his brand of car since there is no stock");
+            
             return stock_number;
         }
 
@@ -74,9 +67,7 @@ namespace Mandatory_Assignment_2
             {
                 my_stock.TotalInStockCharlie = my_stock.sellIfStock(my_stock.TotalInStockCharlie);
             }
- 
         }
-
 
         public string GetStockStatus(carStock my_stock)
         {
@@ -129,12 +120,10 @@ namespace Mandatory_Assignment_2
             string allowed_user = "jdfl";
             string password = "pw";
 
-
             Console.WriteLine("Please provide username to access the BrandX system");
             string input_user = Console.ReadLine();
             Console.WriteLine("Please provide password");
             string input_password = my_stock.HideCharacter();
-
 
             if (input_user == allowed_user & input_password == password) 
             {
@@ -152,7 +141,6 @@ namespace Mandatory_Assignment_2
                     else if (user_choice == 3)
                     {
                         my_stock.OneCarSold(my_stock);
-
                     }
                     else if (user_choice == 4)
                     {
@@ -166,7 +154,6 @@ namespace Mandatory_Assignment_2
                     {
                         Console.WriteLine("Invalid choice");
                     }
-
                     Console.Write("\n\n\n");
                     Console.WriteLine("Press Enter to run again");
                     Console.ReadLine();
@@ -178,7 +165,6 @@ namespace Mandatory_Assignment_2
             }
             Console.ReadLine();
         }
-
     }
     public class carClass
     {
