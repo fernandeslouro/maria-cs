@@ -76,7 +76,7 @@ public class Processor
         Console.WriteLine($"Id\t CustomerId\t CaseType\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes\t");
         foreach (Case c in list_of_cases)
         {
-            Console.WriteLine($"{c.CustomerId}\t {c.CaseType}\t {c.Startdate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.OtherNotes}");
+            Console.WriteLine($"{c.CustomerId}\t {c.Casetype}\t {c.Startdate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.OtherNotes}");
         }
 
     }
