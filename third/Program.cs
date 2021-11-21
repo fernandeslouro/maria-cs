@@ -1,8 +1,9 @@
-﻿namespace third
+﻿using System;
+namespace third
 {
     class Processor
     {
-        private List<FilmInfo> lawyersList = new List<FilmInfo>();
+        private List<Lawyer> lawyersList = new List<Lawyer>();
 
         public List<Lawyer> ImportFile(string path_layers_file)
         {
@@ -52,29 +53,6 @@
         }
 
 
-
-        public List<string> FindUniqueActoressesNames()
-        {
-            List<string> actoresses = new List<string>();
-
-            StringBuilder sb = new StringBuilder();
-
-            foreach (FilmInfo f in filmList)
-            {
-                //if one actoress already exists in the list then do not add
-                if (!actoresses.Exists(a => a == f.Actoress))
-                {
-                    actoresses.Add(f.Actoress);
-                    sb.AppendLine(f.Actoress);
-                }
-
-            }
-
-            File.WriteAllText("/Users/abidh/Teaching/IP/TestData/output.csv", sb.ToString());
-
-            return actoresses;
-        }
-
         void ListClients(List<Client> list_of_clients)
         {
 
@@ -97,13 +75,19 @@
 
         }
 
+    void listAppointments(List<Appointment> list_of_appointments)
+        {
+
+            Console.WriteLine($"Id\t ClientId\t LawyerId\t Datetime\t MeetingRoom\t ShortDescription");
+            foreach (Client c in list_of_cases)
+            {
+                Console.WriteLine($"{c.ClientId}\t {c.LawyerId}\t {c.Datetime}\t {c.MeetingRoom}\t {c.ShortDescription}");
+            }
+
+        }
 
 
 
-    void ListAppointments()
-    {
-
-    }
 
     void login()
     {
@@ -112,15 +96,15 @@
         Console.WriteLine(" 1. Lawyer");
         Console.WriteLine(" 2. Admin");
         Console.WriteLine(" 3. Receptionist");
-        int option = int.Parse(Console.Readline());
+        int option = int.Parse(Console.ReadLine());
 
 
         /* After selecting one of the three roles. User is prompted with Login. User is asked username and
         password and if correct details are entered user is presented with the features available. */
         Console.WriteLine("Input your username:");
-        string input_user = Console.Readline();
+        string input_user = Console.ReadLine();
         Console.WriteLine("Input your password:");
-        string input_password = Console.Readline();
+        string input_password = Console.ReadLine();
 
         string allowed_user = "user";
         string allowed_password = "pw";
@@ -146,7 +130,7 @@
             Console.WriteLine(" 2. Add a new appointment");
             Console.WriteLine(" 3. List all appointments");
             Console.WriteLine(" 4. List all clients");
-            int receptionist_option = int.Parse(Console.Readline());
+            int receptionist_option = int.Parse(Console.ReadLine());
 
         }
         else if (option == 2)
@@ -159,7 +143,7 @@
             Console.WriteLine(" 1. List all cases");
             Console.WriteLine(" 2. Add a new case");
             Console.WriteLine(" 3. List all appointments");
-            int lawyer_option = int.Parse(Console.Readline());
+            int lawyer_option = int.Parse(Console.ReadLine());
 
         }
         else if (option == 3)
@@ -171,7 +155,7 @@
             Console.WriteLine("Choose between the possible options for Admins:");
             Console.WriteLine(" 1. List all cases");
             Console.WriteLine(" 2. List all appointments");
-            int lawyer_option = int.Parse(Console.Readline());
+            int lawyer_option = int.Parse(Console.ReadLine());
 
         }
     }
