@@ -1,95 +1,101 @@
 ﻿using System;
 namespace third
 {
-    class Processor
+
+
+public class Processor
+{
+    public List<Lawyer> lawyersList = new List<Lawyer>();
+    public List<Case> casesList = new List<Case>();
+    public List<Appointment> appointmentList = new List<Appointment>();
+    public List<Administration> administrationList = new List<Administration>();
+    public List<Receptionist> receptionistList = new List<Receptionist>();
+
+    public List<Lawyer> ImportFile(string path_layers_file)
     {
-        private List<Lawyer> lawyersList = new List<Lawyer>();
+        //initialized and empty array list of Lawyer object type
+        List<Lawyer> lawyers = new List<Lawyer>();
 
-        public List<Lawyer> ImportFile(string path_layers_file)
+        string[] lines = File.ReadAllLines(path_layers_file);
+
+        //loop to split and read each line into objects
+        for (int i = 1; i < lines.Length; i++)
         {
-            //initialized and empty array list of Lawyer object type
-            List<Lawyer> lawyers = new List<Lawyer>();
+            var columns = lines[i].Split(',');
+            Lawyer l = new Lawyer();
 
-            string[] lines = File.ReadAllLines(path_layers_file);
+            l.EmployeeId = columns[0];
+            l.Name = columns[1];
+            l.DOB = columns[2];
+            l.YearsofExperience = int.Parse(columns[3]);
+            l.Specialization = columns[4];
+            l.JoinedDate = columns[5];
+            l.OtherExpertise = columns[6];
 
-            //loop to split and read each line into objects
-            for (int i = 1; i < lines.Length; i++)
-            {
-                var columns = lines[i].Split(',');
-                Lawyer l = new Lawyer();
-
-                l.EmployeeId = int.Parse(columns[0]);
-                l.Name = columns[1];
-                l.DOB = columns[2];
-                l.YearsofExperience = int.Parse(columns[3]);
-                l.Specialization = columns[4];
-                l.JoinedDate = columns[5];
-                l.OtherExpertise = columns[6];
-
-                lawyers.Add(l);
-
-            }
-
-            lawyersList = lawyers;
-            return lawyers;
+            lawyers.Add(l);
 
         }
 
+        lawyersList = lawyers;
+        return lawyers;
 
-        public List<Client> AddNewClient(List<Client> list_of_clients, Client client_to_add)
+    }
+
+
+    public List<Client> AddNewClient(List<Client> list_of_clients, Client client_to_add)
+    {
+        list_of_clients.Add(client_to_add);
+        return list_of_clients;
+    }
+    public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments, Appointment appointment_to_add)
+    {
+        list_of_appointments.Add(appointment_to_add);
+        return list_of_appointments;
+    }
+    public List<Case> AddNewCase(List<Case> list_of_cases, Case case_to_add)
+    {
+        list_of_cases.Add(case_to_add);
+        return list_of_cases;
+    }
+
+
+    void ListClients(List<Client> list_of_clients)
+    {
+
+        Console.WriteLine($"Id\t Firstname\t MiddleName\t Lastname\t DOB\t CaseType\t Street\t Steet_Nr\t Zip\t City\t ");
+        foreach (Client c in list_of_clients)
         {
-            list_of_clients.Add(client_to_add);
-            return list_of_clients;
+            Console.WriteLine($"{c.Id}\t {c.Firstname}\t {c.MiddleName}\t {c.Lastname}\t {c.DOB}\t {c.CaseType}\t {c.Street}\t {c.Steet_Nr}\t {c.Zip}\t {c.City}\t ");
         }
-        public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments, Client appointment_to_add)
+
+    }
+
+    void ListCases(List<Case> list_of_cases)
+    {
+
+        Console.WriteLine($"Id\t CustomerId\t CaseType\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes\t");
+        foreach (Case c in list_of_cases)
         {
-            list_of_appoitnments.Add(appointment_to_add);
-            return list_of_appointments;
-        }
-        public List<Case> AddNewCase(List<Case> list_of_cases, Client case_to_add)
-        {
-            list_of_cases.Add(case_to_add);
-            return list_of_cases;
+            Console.WriteLine($"{c.CustomerId}\t {c.CaseType}\t {c.Startdate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.OtherNotes}");
         }
 
-
-        void ListClients(List<Client> list_of_clients)
-        {
-
-            Console.WriteLine($"Id\t Firstname\t MiddleName\t Lastname\t DOB\t CaseType\t Street\t Steet_Nr\t Zip\t City\t ");
-            foreach (Client c in list_of_clients)
-            {
-                Console.WriteLine($"{c.Id}\t {c.Firstname}\t {c.MiddleName}\t {c.Lastname}\t {c.DOB}\t {c.CaseType}\t {c.Street}\t {c.Steet_Nr}\t {c.Zip}\t {c.City}\t ");
-            }
-
-        }
- 
-        void ListCases(List<Case> list_of_cases)
-        {
-
-            Console.WriteLine($"Id\t CustomerId\t CaseType\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t Othernotes\t");
-            foreach (Client c in list_of_cases)
-            {
-                Console.WriteLine($"{c.CustomerId}\t {c.CaseType}\t {c.StartDate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.Othernotes}");
-            }
-
-        }
+    }
 
     void listAppointments(List<Appointment> list_of_appointments)
+    {
+
+        Console.WriteLine($"Id\t ClientId\t LawyerId\t Datetime\t MeetingRoom\t ShortDescription");
+        foreach (Appointment a in list_of_appointments)
         {
-
-            Console.WriteLine($"Id\t ClientId\t LawyerId\t Datetime\t MeetingRoom\t ShortDescription");
-            foreach (Client c in list_of_cases)
-            {
-                Console.WriteLine($"{c.ClientId}\t {c.LawyerId}\t {c.Datetime}\t {c.MeetingRoom}\t {c.ShortDescription}");
-            }
-
+            Console.WriteLine($"{a.ClientId}\t {a.LawyerId}\t {a.Datetime}\t {a.MeetingRoom}\t {a.ShortDescription}");
         }
 
+    }
 
 
 
-    void login()
+
+    public void login()
     {
         /* When the application starts it presents three options 1. Lawyer 2. Admin 3. Receptionist */
         Console.WriteLine("Choose between:");
@@ -111,14 +117,14 @@ namespace third
 
         if (input_password == allowed_password && input_user == allowed_user)
         {
-            function_usage();
+            function_usage(option);
         }
     }
 
-    void function_usage()
+    void function_usage(int chosen_option)
     {
         /* After successful login, a list of choices is presented. */
-        if (option == 1)
+        if (chosen_option == 1)
         {
             /* o Receptionist can perform following features.
                 § Register a new client
@@ -133,7 +139,7 @@ namespace third
             int receptionist_option = int.Parse(Console.ReadLine());
 
         }
-        else if (option == 2)
+        else if (chosen_option == 2)
         {
             /*o Lawyer should be able to perform following tasks
             § List all Cases
@@ -146,7 +152,7 @@ namespace third
             int lawyer_option = int.Parse(Console.ReadLine());
 
         }
-        else if (option == 3)
+        else if (chosen_option == 3)
         {
             /*o Admin staff should be able to perform following tasks:
             § List all Cases
@@ -159,24 +165,17 @@ namespace third
 
         }
     }
+}
 
-
-    class Program
+    public class Program
     {
 
         static void Main(string[] args)
         {
+            Processor myProc = new Processor();
 
-            List<Lawyer> listLawyers;
-            List<Client> listClients;
-            List<Administration> ListAdministrations;
-            list<Receptionist> listReceptionists;
-            List<Case> listCases;
-            List<Appointment> listAppointments;
-
-
-            listLawyers = ImportFile("lawyers_database.csv");
-
-            login();
+            myProc.lawyersList = myProc.ImportFile("lawyers_database.csv");
+            myProc.login();
         }
-    }}}
+    }
+}

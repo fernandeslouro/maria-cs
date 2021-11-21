@@ -3,71 +3,71 @@ namespace third{
 /*Build appropriate Classes for storing the following entities:
 Client, Lawyer, Administration, Receptionist, Case and Appointment*/
 
-class Person
+public class Person
 {
 
 }
-class Client
+public class Client
 {
-    string Id;
-    string Firstname;
-    string MiddleName;
-    string Lastname;
-    DateTime DOB;
-    string CaseType;
-    string Street;
-    int Steet_Nr;
-    string Zip;
-    string City;
+    public string Id;
+    public string Firstname;
+    public string MiddleName;
+    public string Lastname;
+    public DateTime DOB;
+    public string CaseType;
+    public string Street;
+    public int Steet_Nr;
+    public string Zip;
+    public string City;
 }
-class Lawyer
+public class Lawyer
 {
-    string EmployeeId;
-    string Name;
-    string DOB;
-    string YearsofExperience;
-    string Specialization;
-    string JoinedDate;
-    string OtherExpertise;
+    public string EmployeeId;
+    public string Name;
+    public string DOB;
+    public int YearsofExperience;
+    public string Specialization;
+    public string JoinedDate;
+    public string OtherExpertise;
 }
-class Administration
+public class Administration
 {
-    string Id;
-    string Name;
-    DateTime JoinedOn;
-    string Role;
-    string OtherExpertise;
-}
-
-class Receptionist
-{
-    string Id;
-    string Name;
-    string OtherExpertise;
-    string JoinedDate;
+    public string Id;
+    public string Name;
+    public DateTime JoinedOn;
+    public string Role;
+    public string OtherExpertise;
 }
 
-class Case
+public class Receptionist
 {
-    string Id;
-    string CustomerId;
-    string Casetype;// (Corporate, Family or Criminal)
-    DateTime Startdate;
-    string ExpectedProcessDuration;
-    string TotalCharges;
-    string LawyerId;
-    string SituationDescription;
-    string OtherNotes;
+    public string Id;
+    public string Name;
+    public string OtherExpertise;
+    public string JoinedDate;
 }
 
-class Appointment
+public class Case
 {
-    string Id;
-    string ClientId;
-    string LawyerId;
-    DateTime Datetime;
-    string MeetingRoom;
-    string ShortDescription;
+    public string Id;
+    public string CustomerId;
+    public string Casetype;// (Corporate, Family or Criminal)
+    public DateTime Startdate;
+    public string ExpectedProcessDuration;
+    public string TotalCharges;
+    public string LawyerId;
+    public string SituationDescription;
+    public string OtherNotes;
+}
+
+public class Appointment
+{
+    public string Id;
+    public string ClientId;
+    public string LawyerId;
+    public DateTime Datetime;
+    public string MeetingRoom;
+    public string ShortDescription;
 }
 
 }
