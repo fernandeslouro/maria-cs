@@ -7,6 +7,7 @@ public class Processor
 {
     public List<Lawyer> lawyersList = new List<Lawyer>();
     public List<Case> casesList = new List<Case>();
+    public List<Client> clientsList = new List<Client>();
     public List<Appointment> appointmentList = new List<Appointment>();
     public List<Administration> administrationList = new List<Administration>();
     public List<Receptionist> receptionistList = new List<Receptionist>();
@@ -114,7 +115,7 @@ public class Processor
 
         string allowed_user = "user";
         string allowed_password = "pw";
-
+ 
         if (input_password == allowed_password && input_user == allowed_user)
         {
             function_usage(option);
@@ -138,6 +139,20 @@ public class Processor
             Console.WriteLine(" 4. List all clients");
             int receptionist_option = int.Parse(Console.ReadLine());
 
+            if (receptionist_option == 1){
+                // add a new client - IMPLEMENT
+            } else if (receptionist_option == 2){
+                // add a new appointment - IMPLEMENT
+            } else if (receptionist_option == 3){
+                listAppointments(appointmentList);
+            } else if (receptionist_option == 4){
+                ListClients(clientsList);
+            } else {
+                Console.WriteLine("Choose between 1, 2 and 3");
+            }
+
+
+
         }
         else if (chosen_option == 2)
         {
@@ -151,6 +166,15 @@ public class Processor
             Console.WriteLine(" 3. List all appointments");
             int lawyer_option = int.Parse(Console.ReadLine());
 
+            if (lawyer_option == 1){
+                ListCases(casesList);
+            } else if (lawyer_option == 2){
+                // add a new case - IMPLEMENT
+            } else if (lawyer_option == 3){
+                listAppointments(appointmentList);
+            } else {
+                Console.WriteLine("Choose between 1, 2 and 3");
+            }
         }
         else if (chosen_option == 3)
         {
@@ -161,7 +185,15 @@ public class Processor
             Console.WriteLine("Choose between the possible options for Admins:");
             Console.WriteLine(" 1. List all cases");
             Console.WriteLine(" 2. List all appointments");
-            int lawyer_option = int.Parse(Console.ReadLine());
+            int admin_option = int.Parse(Console.ReadLine());
+            if (admin_option ==1){
+                ListCases(casesList);
+            } else if (admin_option == 2){
+                listAppointments(appointmentList);
+            } else {
+                Console.WriteLine("Choose between 1 and 2");
+            }
+
 
         }
     }
@@ -173,7 +205,7 @@ public class Processor
         static void Main(string[] args)
         {
             Processor myProc = new Processor();
-
+            Console.WriteLine("ayy");
             myProc.lawyersList = myProc.ImportFile("lawyers_database.csv");
             myProc.login();
         }
