@@ -70,4 +70,85 @@ public class Appointment
     public string ShortDescription;
 }
 
+
+    public List<Lawyer> ImportFile(string path_layers_file)
+    {
+        //initialized and empty array list of Lawyer object type
+        List<Lawyer> lawyers = new List<Lawyer>();
+
+        string[] lines = File.ReadAllLines(path_layers_file);
+
+        //loop to split and read each line into objects
+        for (int i = 1; i < lines.Length; i++)
+        {
+            var columns = lines[i].Split(',');
+            Lawyer l = new Lawyer();
+
+            l.EmployeeId = columns[0];
+            l.Name = columns[1];
+            l.DOB = columns[2];
+            l.YearsofExperience = int.Parse(columns[3]);
+            l.Specialization = columns[4];
+            l.JoinedDate = columns[5];
+            l.OtherExpertise = columns[6];
+
+            lawyers.Add(l);
+
+        }
+
+        lawyersList = lawyers;
+        return lawyers;
+
+    }
+
+
+    public List<Client> AddNewClient(List<Client> list_of_clients, Client client_to_add)
+    {
+        list_of_clients.Add(client_to_add);
+        return list_of_clients;
+    }
+    public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments, Appointment appointment_to_add)
+    {
+        list_of_appointments.Add(appointment_to_add);
+        return list_of_appointments;
+    }
+    public List<Case> AddNewCase(List<Case> list_of_cases, Case case_to_add)
+    {
+        list_of_cases.Add(case_to_add);
+        return list_of_cases;
+    }
+
+
+    void ListClients(List<Client> list_of_clients)
+    {
+
+        Console.WriteLine($"Id\t Firstname\t MiddleName\t Lastname\t DOB\t CaseType\t Street\t Steet_Nr\t Zip\t City\t ");
+        foreach (Client c in list_of_clients)
+        {
+            Console.WriteLine($"{c.Id}\t {c.Firstname}\t {c.MiddleName}\t {c.Lastname}\t {c.DOB}\t {c.CaseType}\t {c.Street}\t {c.Steet_Nr}\t {c.Zip}\t {c.City}\t ");
+        }
+
+    }
+
+    void ListCases(List<Case> list_of_cases)
+    {
+
+        Console.WriteLine($"Id\t CustomerId\t CaseType\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes\t");
+        foreach (Case c in list_of_cases)
+        {
+            Console.WriteLine($"{c.CustomerId}\t {c.Casetype}\t {c.Startdate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.OtherNotes}");
+        }
+
+    }
+
+    void listAppointments(List<Appointment> list_of_appointments)
+    {
+
+        Console.WriteLine($"Id\t ClientId\t LawyerId\t Datetime\t MeetingRoom\t ShortDescription");
+        foreach (Appointment a in list_of_appointments)
+        {
+            Console.WriteLine($"{a.ClientId}\t {a.LawyerId}\t {a.Datetime}\t {a.MeetingRoom}\t {a.ShortDescription}");
+        }
+
+    }
 }
