@@ -1,75 +1,117 @@
-namespace third{
-
-/*Build appropriate Classes for storing the following entities:
-Client, Lawyer, Administration, Receptionist, Case and Appointment*/
-
-public class Person
+namespace third
 {
 
-}
-public class Client
-{
-    public string Id;
-    public string Firstname;
-    public string MiddleName;
-    public string Lastname;
-    public DateTime DOB;
-    public string CaseType;
-    public string Street;
-    public int Steet_Nr;
-    public string Zip;
-    public string City;
-}
-public class Lawyer
-{
-    public string EmployeeId;
-    public string Name;
-    public string DOB;
-    public int YearsofExperience;
-    public string Specialization;
-    public string JoinedDate;
-    public string OtherExpertise;
-}
-public class Administration
-{
-    public string Id;
-    public string Name;
-    public DateTime JoinedOn;
-    public string Role;
-    public string OtherExpertise;
-}
+    /*Build appropriate Classes for storing the following entities:
+    Client, Lawyer, Administration, Receptionist, Case and Appointment*/
 
-public class Receptionist
-{
-    public string Id;
-    public string Name;
-    public string OtherExpertise;
-    public string JoinedDate;
-}
+    public class Person
+    {
 
-public class Case
-{
-    public string Id;
-    public string CustomerId;
-    public string Casetype;// (Corporate, Family or Criminal)
-    public DateTime Startdate;
-    public string ExpectedProcessDuration;
-    public string TotalCharges;
-    public string LawyerId;
-    public string SituationDescription;
-    public string OtherNotes;
-}
+    }
+    public class Client
+    {
+        public string Id;
+        public string Firstname;
+        public string MiddleName;
+        public string Lastname;
+        public DateTime DOB;
+        public string CaseType;
+        public string Street;
+        public int Steet_Nr;
+        public string Zip;
+        public string City;
+    }
+    public class Lawyer
+    {
+        public string EmployeeId;
+        public string Name;
+        public string DOB;
+        public int YearsofExperience;
+        public string Specialization;
+        public string JoinedDate;
+        public string OtherExpertise;
+    }
+    public class Administration
+    {
+        public string Id;
+        public string Name;
+        public DateTime JoinedOn;
+        public string Role;
+        public string OtherExpertise;
+    }
 
-public class Appointment
-{
-    public string Id;
-    public string ClientId;
-    public string LawyerId;
-    public DateTime Datetime;
-    public string MeetingRoom;
-    public string ShortDescription;
-}
+    public class Receptionist
+    {
+        public string Id;
+        public string Name;
+        public string OtherExpertise;
+        public string JoinedDate;
+    }
 
+    public class Case
+    {
+        public string Id;
+        public string CustomerId;
+        public string Casetype;// (Corporate, Family or Criminal)
+        public DateTime Startdate;
+        public string ExpectedProcessDuration;
+        public string TotalCharges;
+        public string LawyerId;
+        public string SituationDescription;
+        public string OtherNotes;
+    }
+
+    public class Appointment
+    {
+        public string Id;
+        public string ClientId;
+        public string LawyerId;
+        public DateTime Datetime;
+        public string MeetingRoom;
+        public string ShortDescription;
+    }
+
+
+
+    public Client inputClient(){
+    }
+
+    public Client inputClient(){
+        // Id, Firstname, MiddleName, Lastname, DOB, CaseType, Street, Steet Nr, Zip, City
+        Client input_client = new Client;
+
+        Console.WriteLine("Input Id");
+        Client.Id = Console.ReadLine();
+
+        Console.WriteLine("Input FirstName");
+        Client.FirstName = Console.ReadLine();
+
+        Console.WriteLine("Input Middlename");
+        Client.Middlename = Console.ReadLine();
+
+        Console.WriteLine("Input Lastname");
+        Client.Lastname = Console.ReadLine();
+
+        Console.WriteLine("Input DOB");
+        Client.DOB = Console.ReadLine();
+
+        Console.WriteLine("Input CaseType");
+        Client.CaseType = Console.ReadLine();
+
+        Console.WriteLine("Input Street");
+        Client.Street = Console.ReadLine();
+
+        Console.WriteLine("Input Street Nr");
+        Client.Street_Nr = Console.ReadLine();
+
+        Console.WriteLine("Input Zip");
+        Client.Zip = Console.ReadLine();
+
+        Console.WriteLine("Input City");
+        Client.City = Console.ReadLine();
+
+
+    }
 
     public List<Lawyer> ImportFile(string path_layers_file)
     {
