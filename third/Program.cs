@@ -169,6 +169,7 @@ namespace third
                 var columns = lines[i].Split(',');
                 Lawyer l = new Lawyer();
 
+
                 l.EmployeeId = columns[0];
                 l.Name = columns[1];
                 l.DOB = columns[2];
@@ -374,7 +375,6 @@ namespace third
         static void Main(string[] args)
         {
             Processor myProc = new Processor();
-            Console.WriteLine("ayy");
             myProc.lawyersList = myProc.ImportFile("lawyers_database.csv");
             myProc.login();
         }

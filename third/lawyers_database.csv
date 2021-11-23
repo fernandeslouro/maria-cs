@@ -10,7 +10,7 @@ EmployeeId, Name, DOB, YearsofExperience, Specialization, JoinedDate, OtherExper
 133, Jaylyn Rose, 1993-09-30, 4, CriminalCase, 2017-05-19, Note Taking
 134, Gunnar Mcguire, 1998-03-01, 1, Corporate, 2020-04-05, Speed Typing
 135, Lillian Foster, 1990-10-12, 5, FamilyCase, 2016-04-25, MS Office
-136, Kasey Anthony, 1996-11-11, 3 CriminalCase, 2018-05-06, Sketching
+136, Kasey Anthony, 1996-11-11, 3, CriminalCase, 2018-05-06, Sketching
 137, Londyn Hicks, 1994-12-12, 4, Corporate, 2017-12-20, Finance
 138, Grant Hines, 1990-01-09, 5, CriminalCase, 2015-12-04, Management
 139, Clarissa Wall, 1998-05-05, 1, Corporate, 2019-12-08, Statistics
