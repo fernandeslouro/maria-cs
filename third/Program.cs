@@ -71,7 +71,7 @@ namespace third
 
         public Appointment inputAppointment()
         {
-            //Id, ClientId, LawyerId, Datetime, MeetingRoom, ShortDescription
+            //Id, ClientId, LawyerId, DateTime, MeetingRoom, ShortDescription
             Appointment input_appointment = new Appointment();
 
             bool correct = false;
@@ -88,8 +88,8 @@ namespace third
                 Console.WriteLine("Input LawyerId");
                 input_appointment.LawyerId = Console.ReadLine();
 
-                Console.WriteLine("Input Datetime");
-                input_appointment.Datetime = Console.ReadLine();
+                Console.WriteLine("Input DateTime");
+                input_appointment.DateTime = Console.ReadLine();
 
                 Console.WriteLine("Input MeetingRoom");
                 input_appointment.MeetingRoom = Console.ReadLine();
@@ -99,8 +99,8 @@ namespace third
 
                 Console.WriteLine("The input Appointment is:\n");
 
-                Console.WriteLine($"Id\t ClientId\t LawyerId\t Datetime\t MeetingRoom\t ShortDescription");
-                Console.WriteLine($"{input_appointment.ClientId}\t {input_appointment.LawyerId}\t {input_appointment.Datetime}\t {input_appointment.MeetingRoom}\t {input_appointment.ShortDescription}");
+                Console.WriteLine($"Id\t ClientId\t LawyerId\t DateTime\t MeetingRoom\t ShortDescription");
+                Console.WriteLine($"{input_appointment.ClientId}\t {input_appointment.LawyerId}\t {input_appointment.DateTime}\t {input_appointment.MeetingRoom}\t {input_appointment.ShortDescription}");
 
                 Console.WriteLine("\nIs it Correct? (y/N)");
                 correct_string = Console.ReadLine();
@@ -115,7 +115,7 @@ namespace third
 
         public Case inputCase()
         {
-            // Id, CustomerId, Casetype(Corporate, Family or Criminal), Startdate, ExpectedProcessDuration,TotalCharges, LawyerId, SituationDescription, OtherNotes 
+            // Id, CustomerId, CaseType(Corporate, Family or Criminal), StartDate, ExpectedProcessDuration,TotalCharges, LawyerId, SituationDescription, OtherNotes 
             Case input_case = new Case();
 
             bool correct = false;
@@ -130,10 +130,8 @@ namespace third
                 input_case.CustomerId = Console.ReadLine();
 
                 Console.WriteLine("Input CaseType");
+                Console.WriteLine("1. Corporate \n2. Family \n3. Criminal");
                 input_case.CaseType = Console.ReadLine();
-
-                Console.WriteLine("Input Datetime");
-                input_case.Datetime = Console.ReadLine();
 
                 Console.WriteLine("Input StartDate");
                 input_case.StartDate = Console.ReadLine();
@@ -155,9 +153,9 @@ namespace third
 
 
                 Console.WriteLine("The input Appointment is:\n");
-                Console.WriteLine($"Id\t CustomerId\t Casetype\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes");
+                Console.WriteLine($"Id\t CustomerId\t CaseType\t StartDate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes");
 
-                Console.WriteLine($"{input_case.Id}\t {input_case.CustomerId}\t {input_case.Casetype}\t {input_case.Startdate}\t {input_case.ExpectedProcessDuration}\t {input_case.TotalCharges}\t {input_case.LawyerId}\t {input_case.SituationDescription}\t {input_case.OtherNotes}");
+                Console.WriteLine($"{input_case.Id}\t {input_case.CustomerId}\t {input_case.CaseType}\t {input_case.StartDate}\t {input_case.ExpectedProcessDuration}\t {input_case.TotalCharges}\t {input_case.LawyerId}\t {input_case.SituationDescription}\t {input_case.OtherNotes}");
 
 
                 Console.WriteLine("\nIs it Correct? (y/N)");
@@ -278,10 +276,10 @@ namespace third
 
         void ListCases(List<Case> list_of_cases)
         {
-            Console.WriteLine($"Id\t CustomerId\t CaseType\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes\t");
+            Console.WriteLine($"Id\t CustomerId\t CaseType\t StartDate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes\t");
             foreach (Case c in list_of_cases)
             {
-                Console.WriteLine($"{c.CustomerId}\t {c.Casetype}\t {c.Startdate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.OtherNotes}");
+                Console.WriteLine($"{c.CustomerId}\t {c.CaseType}\t {c.StartDate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.OtherNotes}");
             }
         }
 
@@ -290,10 +288,10 @@ namespace third
         void listAppointments(List<Appointment> list_of_appointments)
         {
 
-            Console.WriteLine($"Id\t ClientId\t LawyerId\t Datetime\t MeetingRoom\t ShortDescription");
+            Console.WriteLine($"Id\t ClientId\t LawyerId\t DateTime\t MeetingRoom\t ShortDescription");
             foreach (Appointment a in list_of_appointments)
             {
-                Console.WriteLine($"{a.ClientId}\t {a.LawyerId}\t {a.Datetime}\t {a.MeetingRoom}\t {a.ShortDescription}");
+                Console.WriteLine($"{a.ClientId}\t {a.LawyerId}\t {a.DateTime}\t {a.MeetingRoom}\t {a.ShortDescription}");
             }
 
         }
