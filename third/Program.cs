@@ -112,8 +112,68 @@ namespace third
             return input_appointment;
         }
 
+
         public Case inputCase()
         {
+            // Id, CustomerId, Casetype(Corporate, Family or Criminal), Startdate, ExpectedProcessDuration,TotalCharges, LawyerId, SituationDescription, OtherNotes 
+            Case input_case = new Case();
+
+            bool correct = false;
+            string correct_string;
+
+            while (!correct)
+            {
+                Console.WriteLine("Input Id");
+                input_case.Id = Console.ReadLine();
+
+                Console.WriteLine("Input CustomerId");
+                input_case.CustomerId = Console.ReadLine();
+
+                Console.WriteLine("Input CaseType");
+                input_case.CaseType = Console.ReadLine();
+
+                Console.WriteLine("Input Datetime");
+                input_case.Datetime = Console.ReadLine();
+
+                Console.WriteLine("Input StartDate");
+                input_case.StartDate = Console.ReadLine();
+
+                Console.WriteLine("Input ExpectedProcessDuration");
+                input_case.ExpectedProcessDuration = Console.ReadLine();
+
+                Console.WriteLine("Input TotalCharges");
+                input_case.TotalCharges = Console.ReadLine();
+
+                Console.WriteLine("Input LawyerId");
+                input_case.SituationDescription = Console.ReadLine();
+
+                Console.WriteLine("Input SituationDescription");
+                input_case.SituationDescription = Console.ReadLine();
+
+                Console.WriteLine("Input OtherNotes");
+                input_case.OtherNotes = Console.ReadLine();
+
+
+                Console.WriteLine("The input Appointment is:\n");
+                Console.WriteLine($"Id\t CustomerId\t Casetype\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes");
+
+                Console.WriteLine($"{input_case.Id}\t {input_case.CustomerId}\t {input_case.Casetype}\t {input_case.Startdate}\t {input_case.ExpectedProcessDuration}\t {input_case.TotalCharges}\t {input_case.LawyerId}\t {input_case.SituationDescription}\t {input_case.OtherNotes}");
+
+
+                Console.WriteLine("\nIs it Correct? (y/N)");
+                correct_string = Console.ReadLine();
+                if (correct_string == "y")
+                {
+                    correct = true;
+                }
+            }
+            return input_case;
+        }
+
+
+        public Case inputSimplified()
+        {
+            Console.Write("\n\n\n\n");
             Case input = new Case();
             PropertyInfo[] properties = typeof(Case).GetProperties();
 
@@ -218,14 +278,14 @@ namespace third
 
         void ListCases(List<Case> list_of_cases)
         {
-
             Console.WriteLine($"Id\t CustomerId\t CaseType\t Startdate\t ExpectedProcessDuration\t TotalCharges\t LawyerId\t SituationDescription\t OtherNotes\t");
             foreach (Case c in list_of_cases)
             {
                 Console.WriteLine($"{c.CustomerId}\t {c.Casetype}\t {c.Startdate}\t {c.ExpectedProcessDuration}\t {c.TotalCharges}\t {c.LawyerId}\t {c.SituationDescription}\t {c.OtherNotes}");
             }
-
         }
+
+
 
         void listAppointments(List<Appointment> list_of_appointments)
         {
@@ -241,130 +301,158 @@ namespace third
 
         public void login()
         {
-            /* When the application starts it presents three options 1. Lawyer 2. Admin 3. Receptionist */
-            Console.WriteLine("Choose between:");
-            Console.WriteLine(" 1. Lawyer");
-            Console.WriteLine(" 2. Admin");
-            Console.WriteLine(" 3. Receptionist");
-            int option = int.Parse(Console.ReadLine());
-
-
-            /* After selecting one of the three roles. User is prompted with Login. User is asked username and
-            password and if correct details are entered user is presented with the features available. */
-            Console.WriteLine("Input your username:");
-            string input_user = Console.ReadLine();
-            Console.WriteLine("Input your password:");
-            string input_password = Console.ReadLine();
-
-            string allowed_user = "user";
-            string allowed_password = "pw";
-
-            if (input_password == allowed_password && input_user == allowed_user)
+            bool all_finished = false;
+            while (!all_finished)
             {
-                function_usage(option);
-            }
-        }
-
-        void function_usage(int chosen_option)
-        {
-            /* After successful login, a list of choices is presented. */
-            if (chosen_option == 1)
-            {
-                /* o Receptionist can perform following features.
-                    § Register a new client
-                    § Add a new Appointment
-                    § List all appointments
-                    § List all clients */
-                Console.WriteLine("Choose between the possible options for recptionists:");
-                Console.WriteLine(" 1. Register a new client");
-                Console.WriteLine(" 2. Add a new appointment");
-                Console.WriteLine(" 3. List all appointments");
-                Console.WriteLine(" 4. List all clients");
-                int receptionist_option = int.Parse(Console.ReadLine());
-
-                if (receptionist_option == 1)
-                {
-                    // add a new client - IMPLEMENT
-                    Client cli = inputClient();
-                    clientsList = AddNewClient(clientsList, cli);
-                }
-                else if (receptionist_option == 2)
-                {
-                    // add a new appointment - IMPLEMENT
-                    Appointment app = inputAppointment();
-                    appointmentList = AddNewAppointment(appointmentList, app);
-                }
-                else if (receptionist_option == 3)
-                {
-                    listAppointments(appointmentList);
-                }
-                else if (receptionist_option == 4)
-                {
-                    ListClients(clientsList);
-                }
-                else
-                {
-                    Console.WriteLine("Choose between 1, 2, 3 and 4");
-                }
+                /* When the application starts it presents three options 1. Lawyer 2. Admin 3. Receptionist */
+                Console.WriteLine("Choose between:");
+                Console.WriteLine(" 1. Receptionist");
+                Console.WriteLine(" 2. Lawyer");
+                Console.WriteLine(" 3. Admin");
+                Console.WriteLine(" 4. Exit");
+                int chosen_option = int.Parse(Console.ReadLine());
 
 
+                /* After selecting one of the three roles. User is prompted with Login. User is asked username and
+                password and if correct details are entered user is presented with the features available. */
 
-            }
-            else if (chosen_option == 2)
-            {
-                /*o Lawyer should be able to perform following tasks
-                § List all Cases
-                § Add a new Case
-                § List all appointments*/
-                Console.WriteLine("Choose between the possible options for Lawyers:");
-                Console.WriteLine(" 1. List all cases");
-                Console.WriteLine(" 2. Add a new case");
-                Console.WriteLine(" 3. List all appointments");
-                int lawyer_option = int.Parse(Console.ReadLine());
+                /*Console.WriteLine("Input your username:");
+                string input_user = Console.ReadLine();
+                Console.WriteLine("Input your password:");
+                string input_password = Console.ReadLine();
 
-                if (lawyer_option == 1)
-                {
-                    ListCases(casesList);
-                }
-                else if (lawyer_option == 2)
-                {
-                    // add a new case - IMPLEMENT
-                    Case cas = inputCase();
-                    casesList = AddNewCase(casesList, cas);
-                }
-                else if (lawyer_option == 3)
-                {
-                    listAppointments(appointmentList);
-                }
-                else
-                {
-                    Console.WriteLine("Choose between 1, 2 and 3");
-                }
-            }
-            else if (chosen_option == 3)
-            {
-                /*o Admin staff should be able to perform following tasks:
-                § List all Cases
-                § List all appointments */
+                string allowed_user = "user";
+                string allowed_password = "pw";*/
 
-                Console.WriteLine("Choose between the possible options for Admins:");
-                Console.WriteLine(" 1. List all cases");
-                Console.WriteLine(" 2. List all appointments");
-                int admin_option = int.Parse(Console.ReadLine());
-                if (admin_option == 1)
+                //if (input_password == allowed_password && input_user == allowed_user)
+                /* After successful login, a list of choices is presented. */
+                if (chosen_option == 1)
                 {
-                    ListCases(casesList);
-                }
-                else if (admin_option == 2)
-                {
-                    listAppointments(appointmentList);
-                }
-                else
-                {
-                    Console.WriteLine("Choose between 1 and 2");
-                }
+                    /* o Receptionist can perform following features.
+                        § Register a new client
+                        § Add a new Appointment
+                        § List all appointments
+                        § List all clients */
 
+                    bool finished = false;
+                    int receptionist_option;
 
+                    while (!finished)
+                    {
+                        Console.WriteLine(finished);
+                        Console.WriteLine("Choose between the possible options for recptionists:");
+                        Console.WriteLine(" 1. Register a new client");
+                        Console.WriteLine(" 2. Add a new appointment");
+                        Console.WriteLine(" 3. List all appointments");
+                        Console.WriteLine(" 4. List all clients");
+                        Console.WriteLine(" 5. Exit");
+                        receptionist_option = int.Parse(Console.ReadLine());
+                        switch (receptionist_option)
+                        {
+                            case 1:
+                                // add a new client - IMPLEMENT
+                                Client cli = inputClient();
+                                clientsList = AddNewClient(clientsList, cli);
+                                break;
+                            case 2:
+                                // add a new appointment - IMPLEMENT
+                                Appointment app = inputAppointment();
+                                appointmentList = AddNewAppointment(appointmentList, app);
+                                break;
+                            case 3:
+                                listAppointments(appointmentList);
+                                break;
+                            case 4:
+                                ListClients(clientsList);
+                                break;
+                            case 5:
+                                finished = true;
+                                break;
+                            default:
+                                Console.WriteLine("Choose between 1, 2, 3 and 4");
+                                break;
+                        }
+                    }
+                }
+                else if (chosen_option == 2)
+                {
+                    /*o Lawyer should be able to perform following tasks
+                    § List all Cases
+                    § Add a new Case
+                    § List all appointments*/
+                    bool finished = false;
+                    int lawyer_option;
+                    while (!finished)
+                    {
+                        Console.WriteLine("Choose between the possible options for Lawyers:");
+                        Console.WriteLine(" 1. List all cases");
+                        Console.WriteLine(" 2. Add a new case");
+                        Console.WriteLine(" 3. List all appointments");
+                        Console.WriteLine(" 4. Exit");
+                        lawyer_option = int.Parse(Console.ReadLine());
+
+                        switch (lawyer_option)
+                        {
+                            case 1:
+                                ListCases(casesList);
+                                break;
+                            case 2:
+                                // add a new case - IMPLEMENT
+                                Case cas = inputCase();
+                                casesList = AddNewCase(casesList, cas);
+                                break;
+                            case 3:
+                                listAppointments(appointmentList);
+                                break;
+                            case 4:
+                                finished = true;
+                                break;
+                            default:
+                                Console.WriteLine("Choose between 1, 2 and 3");
+                                break;
+                        }
+                    }
+                }
+                else if (chosen_option == 3)
+                {
+                    /*o Admin staff should be able to perform following tasks:
+                    § List all Cases
+                    § List all appointments */
+
+                    int admin_option;
+                    bool finished = false;
+
+                    while (!finished)
+                    {
+                        Console.WriteLine("Choose between the possible options for Admins:");
+                        Console.WriteLine(" 1. List all cases");
+                        Console.WriteLine(" 2. List all appointments");
+                        Console.WriteLine(" 3. Exit");
+
+                        admin_option = int.Parse(Console.ReadLine());
+
+                        switch (admin_option)
+                        {
+                            case 1:
+                                ListCases(casesList);
+                                break;
+                            case 2:
+                                listAppointments(appointmentList);
+                                break;
+                            case 3:
+                                finished = true;
+                                break;
+                            default:
+                                Console.WriteLine("Choose between 1 and 2");
+                                break;
+                        }
+                    }
+
+                }
+                else if (chosen_option == 4)
+                {
+                    all_finished = true;
+                }
             }
         }
     }
