@@ -47,9 +47,9 @@ namespace third
     public class Case
     {
         public string Id;
-        public string CustomerId;
-        public string Casetype;// (Corporate, Family or Criminal)
-        public string Startdate;
+        public string ClientId;
+        public string CaseType;// (Corporate, Family or Criminal)
+        public string StartDate;
         public string ExpectedProcessDuration;
         public string TotalCharges;
         public string LawyerId;
@@ -62,7 +62,7 @@ namespace third
         public string Id;
         public string ClientId;
         public string LawyerId;
-        public string Datetime;
+        public string DateTime;
         public string MeetingRoom;
         public string ShortDescription;
     }
