@@ -4,9 +4,37 @@ namespace third
     /*Build appropriate Classes for storing the following entities:
     Client, Lawyer, Administration, Receptionist, Case and Appointment*/
 
+
+    public class Staff
+    {
+
+        public string EmployeeId;
+        public string Name;
+        public string OtherExpertise;
+        public string JoinedDate;
+    }
+
+
+    public class Receptionist : Staff
+    {
+    }
+
+
+    public class Administration : Staff
+    {
+        public string Role;
+    }
+
+    public class Lawyer : Staff
+    {
+        public string DOB;
+        public string YearsofExperience;
+        public string Specialization;
+    }
+
     public class Client
     {
-        public string Id;
+        public string ClientId;
         public string FirstName;
         public string MiddleName;
         public string LastName;
@@ -17,32 +45,17 @@ namespace third
         public string Zip;
         public string City;
     }
-    public class Lawyer
-    {
-        public string EmployeeId;
-        public string Name;
-        public string DOB;
-        public string YearsofExperience;
-        public string Specialization;
-        public string JoinedDate;
-        public string OtherExpertise;
-    }
-    public class Administration
+
+    public class Appointment
     {
         public string Id;
-        public string Name;
-        public string JoinedOn;
-        public string Role;
-        public string OtherExpertise;
+        public string ClientId;
+        public string LawyerId;
+        public string DateTime;
+        public string MeetingRoom;
+        public string ShortDescription;
     }
 
-    public class Receptionist
-    {
-        public string Id;
-        public string Name;
-        public string OtherExpertise;
-        public string JoinedDate;
-    }
 
     public class Case
     {
@@ -57,15 +70,6 @@ namespace third
         public string OtherNotes;
     }
 
-    public class Appointment
-    {
-        public string Id;
-        public string ClientId;
-        public string LawyerId;
-        public string DateTime;
-        public string MeetingRoom;
-        public string ShortDescription;
-    }
 
 
 

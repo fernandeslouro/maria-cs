@@ -2,19 +2,17 @@
 namespace third
 {
 
-
-    public class Processor: functions
+    public class Processor : functions // ignore functions word dont copy
     {
         public List<Lawyer> lawyersList = new List<Lawyer>();
-        public List<Case> casesList = new List<Case>();
         public List<Client> clientsList = new List<Client>();
+        public List<Case> casesList = new List<Case>();
         public List<Appointment> appointmentList = new List<Appointment>();
         public List<Administration> administrationList = new List<Administration>();
         public List<Receptionist> receptionistList = new List<Receptionist>();
 
 
-
-        public void login()
+       public void login()
         {
             bool all_finished = false;
             while (!all_finished)
@@ -65,14 +63,10 @@ namespace third
                         switch (receptionist_option)
                         {
                             case 1:
-                                // add a new client - IMPLEMENT
-                                Client cli = inputClient();
-                                clientsList = AddNewClient(clientsList, cli);
+                                clientsList = AddNewClient(clientsList);
                                 break;
                             case 2:
-                                // add a new appointment - IMPLEMENT
-                                Appointment app = inputAppointment();
-                                appointmentList = AddNewAppointment(appointmentList, app);
+                                appointmentList = AddNewAppointment(appointmentList);
                                 break;
                             case 3:
                                 listAppointments(appointmentList);
@@ -113,8 +107,7 @@ namespace third
                                 break;
                             case 2:
                                 // add a new case - IMPLEMENT
-                                Case cas = inputCase();
-                                casesList = AddNewCase(casesList, cas);
+                                casesList = AddNewCase(casesList);
                                 break;
                             case 3:
                                 listAppointments(appointmentList);
@@ -179,7 +172,12 @@ namespace third
         {
             Processor myProc = new Processor();
             myProc.lawyersList = myProc.ImportFile("lawyers_database.csv");
+
+
+            //myProc.usage();
             myProc.login();
+
         }
     }
+
 }
