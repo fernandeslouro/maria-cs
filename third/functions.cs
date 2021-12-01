@@ -17,7 +17,8 @@ namespace third
             {
                 Console.WriteLine("Input Lawyer ID");
                 string input_id = Console.ReadLine();
-                if (IdInLawyersList(list_of_lawyers, input_id){
+                if (IdInLawyersList(list_of_lawyers, input_id))
+                {
                     id_allowed = true;
                 }
                 else
@@ -35,7 +36,8 @@ namespace third
             {
                 Console.WriteLine("Input Client ID");
                 string input_id = Console.ReadLine();
-                if (IdInClientsList(list_of_clients, input_id){
+                if (IdInClientsList(list_of_clients, input_id))
+                {
                     id_allowed = true;
                 }
                 else
@@ -129,7 +131,7 @@ namespace third
                 Lawyer l = new Lawyer();
 
 
-                l.Id = columns[0];
+                l.EmployeeId = columns[0];
                 l.Name = columns[1];
                 l.DOB = columns[2];
                 l.YearsofExperience = columns[3];
@@ -201,8 +203,25 @@ namespace third
         }
 
 
+        public bool check_clientID(string input_cid, List<Client> list_of_clients)
+        {
 
-        public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments)
+            Console.WriteLine("Input ClientId");
+            ListClients(current_clients);
+            input_appointment.ClientId = Console.ReadLine();
+
+            foreach (Client c in list_of_clients)
+            {
+                if (c.ClientId == input_cid)
+                {
+                    return true;
+                }
+            )
+            return false;
+            }
+        }
+
+        public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments, List<Lawyer> firm_lawyers, List<Client> current_clients)
         {
             //Id, ClientId, LawyerId, DateTime, MeetingRoom, ShortDescription
             Appointment input_appointment = new Appointment();
@@ -216,10 +235,10 @@ namespace third
                 input_appointment.Id = Console.ReadLine();
 
                 Console.WriteLine("Input ClientId");
-                ListClients(clientsList);
+                ListClients(current_clients);
                 input_appointment.ClientId = Console.ReadLine();
 
-                listLawyers(listLawyers);
+                listLawyers(firm_lawyers);
 
                 Console.WriteLine("Input LawyerId");
                 input_appointment.LawyerId = Console.ReadLine();
@@ -377,7 +396,7 @@ namespace third
 
             foreach (Lawyer l in list_of_lawyers)
             {
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", l.Id, l.Name, l.DOB, l.YearsofExperience, l.Specialization, l.OtherExpertise));
+                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", l.EmployeeId, l.Name, l.DOB, l.YearsofExperience, l.Specialization, l.OtherExpertise));
                 Console.WriteLine(new string('.', 78));
             }
         }

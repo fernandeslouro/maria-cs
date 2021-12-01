@@ -12,7 +12,7 @@ namespace third
         public List<Receptionist> receptionistList = new List<Receptionist>();
 
 
-       public void login()
+        public void login()
         {
             bool all_finished = false;
             while (!all_finished)
@@ -66,7 +66,14 @@ namespace third
                                 clientsList = AddNewClient(clientsList);
                                 break;
                             case 2:
-                                appointmentList = AddNewAppointment(appointmentList);
+                                if (!clientsList.Any())
+                                {
+                                    Console.WriteLine("It is not possible to book an appointment when there are no registered clients.\nRegister a Client first.");
+                                }
+                                else
+                                {
+                                    appointmentList = AddNewAppointment(appointmentList, lawyersList, clientsList);
+                                }
                                 break;
                             case 3:
                                 listAppointments(appointmentList);
@@ -106,8 +113,14 @@ namespace third
                                 ListCases(casesList);
                                 break;
                             case 2:
-                                // add a new case - IMPLEMENT
-                                casesList = AddNewCase(casesList);
+                                if (!clientsList.Any())
+                                {
+                                    Console.WriteLine("It is not possible to book an appointment when there are no registered clients.\nRegister a Client first.");
+                                }
+                                else
+                                {
+                                    casesList = AddNewCase(casesList);
+                                }
                                 break;
                             case 3:
                                 listAppointments(appointmentList);
