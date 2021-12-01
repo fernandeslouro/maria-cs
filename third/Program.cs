@@ -119,7 +119,7 @@ namespace third
                                 }
                                 else
                                 {
-                                    casesList = AddNewCase(casesList);
+                                    casesList = AddNewCase(casesList, lawyersList, clientsList);
                                 }
                                 break;
                             case 3:
