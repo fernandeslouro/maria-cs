@@ -10,68 +10,68 @@ namespace third
             // implement
         }
 
-        public void inputValidLawyerId(List<Lawyer> list_of_lawyers)
-        {
-            bool id_allowed = false;
-            while (!id_allowed)
-            {
-                Console.WriteLine("Input Lawyer ID");
-                string input_id = Console.ReadLine();
-                if (IdInLawyersList(list_of_lawyers, input_id))
+        /*        public void inputValidLawyerId(List<Lawyer> list_of_lawyers)
                 {
-                    id_allowed = true;
+                    bool id_allowed = false;
+                    while (!id_allowed)
+                    {
+                        Console.WriteLine("Input Lawyer ID");
+                        string input_id = Console.ReadLine();
+                        if (IdInLawyersList(list_of_lawyers, input_id))
+                        {
+                            id_allowed = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Insert a valid Lawyer ID");
+                        }
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Insert a valid Lawyer ID");
-                }
-            }
-        }
 
 
-        public void inputValidClientId(List<Client> list_of_clients)
-        {
-            bool id_allowed = false;
-            while (!id_allowed)
-            {
-                Console.WriteLine("Input Client ID");
-                string input_id = Console.ReadLine();
-                if (IdInClientsList(list_of_clients, input_id))
+                public void inputValidClientId(List<Client> list_of_clients)
                 {
-                    id_allowed = true;
+                    bool id_allowed = false;
+                    while (!id_allowed)
+                    {
+                        Console.WriteLine("Input Client ID");
+                        string input_id = Console.ReadLine();
+                        if (IdInClientsList(list_of_clients, input_id))
+                        {
+                            id_allowed = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Insert a valid Client ID");
+                        }
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Insert a valid Client ID");
-                }
-            }
-        }
 
 
-
-        public bool IdInLawyersList(List<Lawyer> list_of_lawyers, string input_id)
-        {
-            foreach (Lawyer l in list_of_lawyers)
-            {
-                if (input_id == l.EmployeeId)
+                public bool IdInLawyersList(List<Lawyer> list_of_lawyers, string input_id)
                 {
-                    return true;
+                    foreach (Lawyer l in list_of_lawyers)
+                    {
+                        if (input_id == l.EmployeeId)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
-            }
-            return false;
-        }
-        public bool IdInClientsList(List<Client> list_of_clients, string input_id)
-        {
-            foreach (Client c in list_of_clients)
-            {
-                if (input_id == c.ClientId)
+                public bool IdInClientsList(List<Client> list_of_clients, string input_id)
                 {
-                    return true;
+                    foreach (Client c in list_of_clients)
+                    {
+                        if (input_id == c.ClientId)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
-            }
-            return false;
-        }
 
+        */
         public Case inputSimplified()
         {
             Console.Write("\n\n\n\n");
@@ -171,8 +171,7 @@ namespace third
                 Console.WriteLine("Input DOB");
                 input_client.DOB = Console.ReadLine();
 
-                Console.WriteLine("Input CaseType");
-                input_client.CaseType = Console.ReadLine();
+                input_client.CaseType = input_valid_casetype();
 
                 Console.WriteLine("Input Street");
                 input_client.Street = Console.ReadLine();
@@ -203,23 +202,136 @@ namespace third
         }
 
 
-        public bool check_clientID(string input_cid, List<Client> list_of_clients)
+        public string input_valid_ClientId(List<Client> list_of_clients)
         {
-
-            Console.WriteLine("Input ClientId");
-            ListClients(current_clients);
-            input_appointment.ClientId = Console.ReadLine();
-
-            foreach (Client c in list_of_clients)
+            while (true)
             {
-                if (c.ClientId == input_cid)
+                ListClients(list_of_clients);
+                Console.WriteLine("Input ClientId");
+                string input_cid = Console.ReadLine();
+
+                foreach (Client c in list_of_clients)
                 {
-                    return true;
+                    if (c.ClientId == input_cid)
+                    {
+                        return input_cid;
+                    }
                 }
-            )
-            return false;
+                Console.WriteLine("Input the ClientId from one of the available clients");
             }
         }
+
+        public string input_valid_LawyerId(List<Lawyer> list_of_lawyers)
+        {
+            while (true)
+            {
+                listLawyers(list_of_lawyers);
+                Console.WriteLine("Input LawyerId");
+                string input_lid = Console.ReadLine();
+
+                foreach (Lawyer l in list_of_lawyers)
+                {
+                    if (l.EmployeeId == input_lid)
+                    {
+                        return input_lid;
+                    }
+                }
+                Console.WriteLine("Input the LawyerId from one of the available lawyers");
+            }
+        }
+        public string input_valid_id(List<Client> list_of_clients)
+        {
+            while (true)
+            {
+                ListClients(list_of_clients);
+                Console.WriteLine("Input ClientId");
+                string input_cid = Console.ReadLine();
+
+                foreach (Client c in list_of_clients)
+                {
+                    if (c.ClientId == input_cid)
+                    {
+                        return input_cid;
+                    }
+                }
+                Console.WriteLine("Input the ClientId from one of the available clients");
+            }
+        }
+
+        public string input_valid_id(List<Lawyer> list_of_lawyers)
+        {
+            while (true)
+            {
+                listLawyers(list_of_lawyers);
+                Console.WriteLine("Input LawyerId");
+                string input_lid = Console.ReadLine();
+
+                foreach (Lawyer l in list_of_lawyers)
+                {
+                    if (l.EmployeeId == input_lid)
+                    {
+                        return input_lid;
+                    }
+                }
+                Console.WriteLine("Input the LawyerId from one of the available lawyers");
+            }
+        }
+
+
+
+        public string input_valid_casetype()
+        {
+            while (true)
+            {
+                Console.WriteLine("Input CaseType");
+                Console.WriteLine("1. Corporate \n2. Family \n3. Criminal");
+                string casetype_str = Console.ReadLine();
+
+                switch (casetype_str)
+                {
+                    case "1":
+                        return "Corporate";
+                    case "2":
+                        return "Family";
+                    case "3":
+                        return "Criminal";
+                    default:
+                        Console.WriteLine("Choose between 1, 2 and 3");
+                        break;
+                }
+            }
+        }
+        public string input_valid_meetingRoom()
+        {
+            while (true)
+            {
+                Console.WriteLine("Input MeetingRoom");
+                Console.WriteLine("1. Acquarium \n2. Cube \n3. Cave");
+                string meetingroom_str = Console.ReadLine();
+
+                switch (meetingroom_str)
+                {
+                    case "1":
+                        return "Acquarium";
+                    case "2":
+                        return "Cube";
+                    case "3":
+                        return "Cave";
+                    default:
+                        Console.WriteLine("Choose between 1, 2 and 3");
+                        break;
+                }
+            }
+        }
+
+        public void input_valid_date(bool includeTime)
+        {
+            Console.WriteLine("Input DateTime");
+            //input_appointment.DateTime = Console.ReadLine();
+
+
+        }
+
 
         public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments, List<Lawyer> firm_lawyers, List<Client> current_clients)
         {
@@ -234,20 +346,16 @@ namespace third
                 Console.WriteLine("Input Id");
                 input_appointment.Id = Console.ReadLine();
 
-                Console.WriteLine("Input ClientId");
-                ListClients(current_clients);
-                input_appointment.ClientId = Console.ReadLine();
+                // input_appointment.ClientId = input_valid_ClientId(current_clients);
+                // input_appointment.LawyerId = input_valid_LawyerId(firm_lawyers);
+                input_appointment.ClientId = input_valid_id(current_clients);
+                input_appointment.LawyerId = input_valid_id(firm_lawyers);
 
-                listLawyers(firm_lawyers);
-
-                Console.WriteLine("Input LawyerId");
-                input_appointment.LawyerId = Console.ReadLine();
 
                 Console.WriteLine("Input DateTime");
                 input_appointment.DateTime = Console.ReadLine();
 
-                Console.WriteLine("Input MeetingRoom");
-                input_appointment.MeetingRoom = Console.ReadLine();
+                input_appointment.MeetingRoom = input_valid_meetingRoom();
 
                 Console.WriteLine("Input ShortDescription");
                 input_appointment.ShortDescription = Console.ReadLine();
@@ -270,7 +378,7 @@ namespace third
 
 
 
-        public List<Case> AddNewCase(List<Case> list_of_cases)
+        public List<Case> AddNewCase(List<Case> list_of_cases, List<Lawyer> firm_lawyers, List<Client> current_clients)
         {
             Case input_case = new Case();
 
@@ -283,35 +391,8 @@ namespace third
                 Console.WriteLine("Input Id");
                 input_case.Id = Console.ReadLine();
 
-                Console.WriteLine("Input ClientId");
-                input_case.ClientId = Console.ReadLine();
-
-                Console.WriteLine("Input CaseType");
-                Console.WriteLine("1. Corporate \n2. Family \n3. Criminal");
-                string casetype_str = Console.ReadLine();
-
-                finished = false;
-                while (!finished)
-                {
-                    switch (casetype_str)
-                    {
-                        case "1":
-                            input_case.CaseType = "Corporate";
-                            finished = true;
-                            break;
-                        case "2":
-                            input_case.CaseType = "Family";
-                            finished = true;
-                            break;
-                        case "3":
-                            input_case.CaseType = "Criminal";
-                            finished = true;
-                            break;
-                        default:
-                            Console.WriteLine("Choose between 1, 2 and 3");
-                            break;
-                    }
-                }
+                //input_case.ClientId = input_valid_ClientId(current_clients);
+                input_case.ClientId = input_valid_id(current_clients);
 
                 Console.WriteLine("Input StartDate");
                 input_case.StartDate = Console.ReadLine();
@@ -322,8 +403,8 @@ namespace third
                 Console.WriteLine("Input TotalCharges");
                 input_case.TotalCharges = Console.ReadLine();
 
-                Console.WriteLine("Input LawyerId");
-                input_case.SituationDescription = Console.ReadLine();
+                // input_case.LawyerId = input_valid_LawyerId(firm_lawyers);
+                input_case.LawyerId = input_valid_id(firm_lawyers);
 
                 Console.WriteLine("Input SituationDescription");
                 input_case.SituationDescription = Console.ReadLine();
@@ -400,7 +481,6 @@ namespace third
                 Console.WriteLine(new string('.', 78));
             }
         }
-
 
 
     }
