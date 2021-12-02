@@ -1,10 +1,9 @@
 ﻿using System;
 namespace third
 {
-
-    public class Processor : functions // ignore functions word dont copy
+    public class Processor : functions
     {
-        public List<Lawyer> lawyersList = new List<Lawyer>();
+        //public List<Lawyer> lawyersList = new List<Lawyer>();
         public List<Client> clientsList = new List<Client>();
         public List<Case> casesList = new List<Case>();
         public List<Appointment> appointmentList = new List<Appointment>();
@@ -14,6 +13,9 @@ namespace third
 
         public void login()
         {
+
+            List<Lawyer> lawyersList = ImportFile("lawyers_database.csv");
+            listLawyers(lawyersList);
             bool all_finished = false;
             while (!all_finished)
             {
@@ -184,8 +186,7 @@ namespace third
         static void Main(string[] args)
         {
             Processor myProc = new Processor();
-            myProc.lawyersList = myProc.ImportFile("lawyers_database.csv");
-
+            //myProc.lawyersList = myProc.ImportFile("lawyers_database.csv");
 
             //myProc.usage();
             myProc.login();

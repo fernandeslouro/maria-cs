@@ -471,14 +471,14 @@ namespace third
 
         public void listLawyers(List<Lawyer> list_of_lawyers)
         {
-            Console.WriteLine(new string('.', 78));
-            Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "OtherExp."));
-            Console.WriteLine(new string('.', 78));
+            Console.WriteLine(new string('.', 113));
+            Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "JoinDate", "OtherExp."));
+            Console.WriteLine(new string('.', 113));
 
             foreach (Lawyer l in list_of_lawyers)
             {
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", l.EmployeeId, l.Name, l.DOB, l.YearsofExperience, l.Specialization, l.OtherExpertise));
-                Console.WriteLine(new string('.', 78));
+                Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.Name, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
+                Console.WriteLine(new string('.', 113));
             }
         }
 
