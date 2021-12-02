@@ -3,7 +3,6 @@ namespace third
 {
     public class Processor : functions
     {
-        //public List<Lawyer> lawyersList = new List<Lawyer>();
         public List<Client> clientsList = new List<Client>();
         public List<Case> casesList = new List<Case>();
         public List<Appointment> appointmentList = new List<Appointment>();
@@ -15,7 +14,6 @@ namespace third
         {
 
             List<Lawyer> lawyersList = ImportFile("lawyers_database.csv");
-            listLawyers(lawyersList);
             bool all_finished = false;
             while (!all_finished)
             {
@@ -78,10 +76,10 @@ namespace third
                                 }
                                 break;
                             case 3:
-                                listAppointments(appointmentList);
+                                displayListContents(appointmentList);
                                 break;
                             case 4:
-                                ListClients(clientsList);
+                                displayListContents(clientsList);
                                 break;
                             case 5:
                                 finished = true;
@@ -112,7 +110,7 @@ namespace third
                         switch (lawyer_option)
                         {
                             case 1:
-                                ListCases(casesList);
+                                displayListContents(casesList);
                                 break;
                             case 2:
                                 if (!clientsList.Any())
@@ -125,7 +123,7 @@ namespace third
                                 }
                                 break;
                             case 3:
-                                listAppointments(appointmentList);
+                                displayListContents(appointmentList);
                                 break;
                             case 4:
                                 finished = true;
@@ -157,10 +155,10 @@ namespace third
                         switch (admin_option)
                         {
                             case 1:
-                                ListCases(casesList);
+                                displayListContents(casesList);
                                 break;
                             case 2:
-                                listAppointments(appointmentList);
+                                displayListContents(appointmentList);
                                 break;
                             case 3:
                                 finished = true;
@@ -186,9 +184,7 @@ namespace third
         static void Main(string[] args)
         {
             Processor myProc = new Processor();
-            //myProc.lawyersList = myProc.ImportFile("lawyers_database.csv");
 
-            //myProc.usage();
             myProc.login();
 
         }

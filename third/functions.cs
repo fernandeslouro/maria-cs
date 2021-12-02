@@ -5,117 +5,6 @@ namespace third
     public class functions
     {
 
-        public void printSpecialistLawyers(List<Lawyer> lawyers_list, string specialization)
-        {
-            // implement
-        }
-
-        /*        public void inputValidLawyerId(List<Lawyer> list_of_lawyers)
-                {
-                    bool id_allowed = false;
-                    while (!id_allowed)
-                    {
-                        Console.WriteLine("Input Lawyer ID");
-                        string input_id = Console.ReadLine();
-                        if (IdInLawyersList(list_of_lawyers, input_id))
-                        {
-                            id_allowed = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Insert a valid Lawyer ID");
-                        }
-                    }
-                }
-
-
-                public void inputValidClientId(List<Client> list_of_clients)
-                {
-                    bool id_allowed = false;
-                    while (!id_allowed)
-                    {
-                        Console.WriteLine("Input Client ID");
-                        string input_id = Console.ReadLine();
-                        if (IdInClientsList(list_of_clients, input_id))
-                        {
-                            id_allowed = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Insert a valid Client ID");
-                        }
-                    }
-                }
-
-
-                public bool IdInLawyersList(List<Lawyer> list_of_lawyers, string input_id)
-                {
-                    foreach (Lawyer l in list_of_lawyers)
-                    {
-                        if (input_id == l.EmployeeId)
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                public bool IdInClientsList(List<Client> list_of_clients, string input_id)
-                {
-                    foreach (Client c in list_of_clients)
-                    {
-                        if (input_id == c.ClientId)
-                        {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-
-        */
-        public Case inputSimplified()
-        {
-            Console.Write("\n\n\n\n");
-            Case input = new Case();
-            PropertyInfo[] properties = typeof(Case).GetProperties();
-
-            string value;
-            bool correct = false;
-            string correct_string = "N";
-
-            while (!correct)
-            {
-                foreach (PropertyInfo p in properties)
-                {
-                    Console.WriteLine($"Input property");
-                    value = Console.ReadLine();
-                    p.SetValue(input, value);
-                }
-
-
-                Console.WriteLine("The input Appointment is:\n");
-
-                foreach (var p in properties)
-                {
-                    Console.Write(p.Name);
-                    Console.Write("\t");
-                }
-                Console.WriteLine("");
-                foreach (var p in properties)
-                {
-                    Console.Write(p.GetValue(input));
-                    Console.Write("\t");
-                }
-
-                Console.WriteLine("\nIs it Correct? (y/N)");
-                correct_string = Console.ReadLine();
-                if (correct_string == "y")
-                {
-                    correct = true;
-                }
-            }
-            return input;
-        }
-
 
         public List<Lawyer> ImportFile(string path_layers_file)
         {
@@ -144,8 +33,8 @@ namespace third
             }
 
             return lawyers;
-
         }
+
         public List<Client> AddNewClient(List<Client> list_of_clients)
         {
             // Id, Firstname, MiddleName, Lastname, DOB, CaseType, Street, Street Nr, Zip, City
@@ -187,7 +76,7 @@ namespace third
 
                 Console.WriteLine("The input Client is:\n");
 
-                ListClients(new List<Client> { input_client });
+                displayListContents(new List<Client> { input_client });
 
                 Console.WriteLine("\nIs it Correct? (y/N)");
                 correct_string = Console.ReadLine();
@@ -202,48 +91,11 @@ namespace third
         }
 
 
-        public string input_valid_ClientId(List<Client> list_of_clients)
-        {
-            while (true)
-            {
-                ListClients(list_of_clients);
-                Console.WriteLine("Input ClientId");
-                string input_cid = Console.ReadLine();
-
-                foreach (Client c in list_of_clients)
-                {
-                    if (c.ClientId == input_cid)
-                    {
-                        return input_cid;
-                    }
-                }
-                Console.WriteLine("Input the ClientId from one of the available clients");
-            }
-        }
-
-        public string input_valid_LawyerId(List<Lawyer> list_of_lawyers)
-        {
-            while (true)
-            {
-                listLawyers(list_of_lawyers);
-                Console.WriteLine("Input LawyerId");
-                string input_lid = Console.ReadLine();
-
-                foreach (Lawyer l in list_of_lawyers)
-                {
-                    if (l.EmployeeId == input_lid)
-                    {
-                        return input_lid;
-                    }
-                }
-                Console.WriteLine("Input the LawyerId from one of the available lawyers");
-            }
-        }
         public string input_valid_id(List<Client> list_of_clients)
         {
             while (true)
             {
-                ListClients(list_of_clients);
+                displayListContents(list_of_clients);
                 Console.WriteLine("Input ClientId");
                 string input_cid = Console.ReadLine();
 
@@ -262,7 +114,7 @@ namespace third
         {
             while (true)
             {
-                listLawyers(list_of_lawyers);
+                displayListContents(list_of_lawyers);
                 Console.WriteLine("Input LawyerId");
                 string input_lid = Console.ReadLine();
 
@@ -326,9 +178,9 @@ namespace third
 
         public void input_valid_date(bool includeTime)
         {
+            // TODO: Implement protection for dates
             Console.WriteLine("Input DateTime");
             //input_appointment.DateTime = Console.ReadLine();
-
 
         }
 
@@ -346,8 +198,6 @@ namespace third
                 Console.WriteLine("Input Id");
                 input_appointment.Id = Console.ReadLine();
 
-                // input_appointment.ClientId = input_valid_ClientId(current_clients);
-                // input_appointment.LawyerId = input_valid_LawyerId(firm_lawyers);
                 input_appointment.ClientId = input_valid_id(current_clients);
                 input_appointment.LawyerId = input_valid_id(firm_lawyers);
 
@@ -362,7 +212,7 @@ namespace third
 
                 Console.WriteLine("The input Appointment is:\n");
 
-                listAppointments(new List<Appointment> { input_appointment });
+                displayListContents(new List<Appointment> { input_appointment });
 
                 Console.WriteLine("\nIs it Correct? (y/N)");
                 correct_string = Console.ReadLine();
@@ -403,7 +253,6 @@ namespace third
                 Console.WriteLine("Input TotalCharges");
                 input_case.TotalCharges = Console.ReadLine();
 
-                // input_case.LawyerId = input_valid_LawyerId(firm_lawyers);
                 input_case.LawyerId = input_valid_id(firm_lawyers);
 
                 Console.WriteLine("Input SituationDescription");
@@ -414,7 +263,7 @@ namespace third
 
                 Console.WriteLine("The input Appointment is:\n");
 
-                ListCases(new List<Case> { input_case });
+                displayListContents(new List<Case> { input_case });
 
                 Console.WriteLine("\nIs it Correct? (y/N)");
                 correct_string = Console.ReadLine();
@@ -429,7 +278,7 @@ namespace third
         }
 
 
-        public void ListClients(List<Client> list_of_clients)
+        public void displayListContents(List<Client> list_of_clients)
         {
             Console.WriteLine(new string('.', 111));
             Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", "ClientId", "FirstName", "MiddleName", "LastName", "DOB", "CaseType", "Street", "Street_Nr", "Zip", "City"));
@@ -442,7 +291,7 @@ namespace third
             }
         }
 
-        public void ListCases(List<Case> list_of_cases)
+        public void displayListContents(List<Case> list_of_cases)
         {
             Console.WriteLine(new string('.', 100));
             Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.", "T.Charges", "LawyerId", "Sit.Desc.", "OtherNotes"));
@@ -456,7 +305,7 @@ namespace third
         }
 
 
-        public void listAppointments(List<Appointment> list_of_appointments)
+        public void displayListContents(List<Appointment> list_of_appointments)
         {
             Console.WriteLine(new string('.', 67));
             Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", "Id", "ClientId", "LawyerId", "DateTime", "MeetingRoom", "ShortDescription"));
@@ -469,7 +318,7 @@ namespace third
             }
         }
 
-        public void listLawyers(List<Lawyer> list_of_lawyers)
+        public void displayListContents(List<Lawyer> list_of_lawyers)
         {
             Console.WriteLine(new string('.', 113));
             Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "JoinDate", "OtherExp."));
