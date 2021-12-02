@@ -2,9 +2,8 @@
 using System.Reflection;
 namespace third
 {
-    public class functions
+    public abstract class functions
     {
-
 
         public List<Lawyer> ImportFile(string path_layers_file)
         {
@@ -187,9 +186,7 @@ namespace third
 
         public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments, List<Lawyer> firm_lawyers, List<Client> current_clients)
         {
-            //Id, ClientId, LawyerId, DateTime, MeetingRoom, ShortDescription
             Appointment input_appointment = new Appointment();
-
             bool correct = false;
             string correct_string;
 
@@ -231,9 +228,7 @@ namespace third
         public List<Case> AddNewCase(List<Case> list_of_cases, List<Lawyer> firm_lawyers, List<Client> current_clients)
         {
             Case input_case = new Case();
-
             bool correct = false;
-            bool finished = false;
             string correct_string;
 
             while (!correct)
@@ -241,7 +236,6 @@ namespace third
                 Console.WriteLine("Input Id");
                 input_case.Id = Console.ReadLine();
 
-                //input_case.ClientId = input_valid_ClientId(current_clients);
                 input_case.ClientId = input_valid_id(current_clients);
 
                 Console.WriteLine("Input StartDate");
