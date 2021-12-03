@@ -1,5 +1,7 @@
-
+using System;
+using System.IO;
 using System.Reflection;
+using System.Collections.Generic;
 namespace third
 {
     public abstract class functions
@@ -36,15 +38,13 @@ namespace third
 
         public List<Client> AddNewClient(List<Client> list_of_clients)
         {
-            // Id, Firstname, MiddleName, Lastname, DOB, CaseType, Street, Street Nr, Zip, City
             Client input_client = new Client();
-
             bool correct = false;
             string correct_string;
 
             while (!correct)
             {
-                Console.WriteLine("Input Id");
+                Console.WriteLine("Input the Id of the new Client");
                 input_client.ClientId = Console.ReadLine();
 
                 Console.WriteLine("Input FirstName");
@@ -192,7 +192,7 @@ namespace third
 
             while (!correct)
             {
-                Console.WriteLine("Input Id");
+                Console.WriteLine("Input the Id of the new Appointment");
                 input_appointment.Id = Console.ReadLine();
 
                 input_appointment.ClientId = input_valid_id(current_clients);
@@ -233,7 +233,7 @@ namespace third
 
             while (!correct)
             {
-                Console.WriteLine("Input Id");
+                Console.WriteLine("Input the Id of the new Case");
                 input_case.Id = Console.ReadLine();
 
                 input_case.ClientId = input_valid_id(current_clients);
