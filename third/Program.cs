@@ -182,7 +182,6 @@ namespace third
 
     public class Program
     {
-
         static void Main(string[] args)
         {
             Processor myProc = new Processor();
