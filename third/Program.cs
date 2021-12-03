@@ -54,7 +54,6 @@ namespace third
 
                     while (!finished)
                     {
-                        Console.WriteLine(finished);
                         Console.WriteLine("Choose between the possible options for recptionists:");
                         Console.WriteLine(" 1. Register a new client");
                         Console.WriteLine(" 2. Add a new appointment");

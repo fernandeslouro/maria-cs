@@ -22,10 +22,11 @@ namespace third
 
 
                 l.EmployeeId = columns[0];
-                l.Name = columns[1];
+                l.EmployeeName = columns[1];
                 l.DOB = columns[2];
                 l.YearsofExperience = columns[3];
-                l.Specialization = columns[4];
+                // Parsing the string into the enum type
+                l.Specialization = (ECaseType) Enum.Parse(typeof(ECaseType), columns[4], true);
                 l.JoinedDate = columns[5];
                 l.OtherExpertise = columns[6];
 
@@ -130,7 +131,7 @@ namespace third
 
 
 
-        public string input_valid_casetype()
+        public ECaseType input_valid_casetype()
         {
             while (true)
             {
@@ -141,18 +142,18 @@ namespace third
                 switch (casetype_str)
                 {
                     case "1":
-                        return "Corporate";
+                        return ECaseType.Corporate;
                     case "2":
-                        return "Family";
+                        return ECaseType.Family;
                     case "3":
-                        return "Criminal";
+                        return ECaseType.Criminal;
                     default:
                         Console.WriteLine("Choose between 1, 2 and 3");
                         break;
                 }
             }
         }
-        public string input_valid_meetingRoom()
+        public EMeetingRoom input_valid_meetingRoom()
         {
             while (true)
             {
@@ -163,11 +164,11 @@ namespace third
                 switch (meetingroom_str)
                 {
                     case "1":
-                        return "Acquarium";
+                        return EMeetingRoom.Acquarium;
                     case "2":
-                        return "Cube";
+                        return EMeetingRoom.Cube;
                     case "3":
-                        return "Cave";
+                        return EMeetingRoom.Cave;
                     default:
                         Console.WriteLine("Choose between 1, 2 and 3");
                         break;
@@ -320,10 +321,27 @@ namespace third
 
             foreach (Lawyer l in list_of_lawyers)
             {
-                Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.Name, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
+                Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
                 Console.WriteLine(new string('.', 113));
             }
         }
+
+        public void displayListContents(List<Lawyer> list_of_lawyers, ECaseType specialization)
+        {
+            Console.WriteLine(new string('.', 113));
+            Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "JoinDate", "OtherExp."));
+            Console.WriteLine(new string('.', 113));
+
+            foreach (Lawyer l in list_of_lawyers)
+            {
+                if (l.Specialization == specialization)
+                {
+                    Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
+                    Console.WriteLine(new string('.', 113));
+                }
+            }
+        }
+
 
 
     }
