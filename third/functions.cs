@@ -20,13 +20,12 @@ namespace third
                 var columns = lines[i].Split(',');
                 Lawyer l = new Lawyer();
 
-
                 l.EmployeeId = columns[0];
                 l.EmployeeName = columns[1];
                 l.DOB = columns[2];
                 l.YearsofExperience = columns[3];
                 // Parsing the string into the enum type
-                l.Specialization = (ECaseType) Enum.Parse(typeof(ECaseType), columns[4], true);
+                l.Specialization = (ECaseType)Enum.Parse(typeof(ECaseType), columns[4], true);
                 l.JoinedDate = columns[5];
                 l.OtherExpertise = columns[6];
 
@@ -110,17 +109,29 @@ namespace third
             }
         }
 
-        public string input_valid_id(List<Lawyer> list_of_lawyers)
+        public string input_valid_id(List<Lawyer> list_of_lawyers, List<Client> list_of_clients, string input_client_id)
         {
+
+            ECaseType needed_expertise = ECaseType.Corporate; // placeholder value
+            // getting casetype from Client in order to suggest expert lawyers
+            foreach (Client c in list_of_clients)
+            {
+                if (c.ClientId == input_client_id)
+                {
+                    needed_expertise = c.CaseType;
+                    break;
+                }
+            }
+
             while (true)
             {
-                displayListContents(list_of_lawyers);
+                displayListContents(list_of_lawyers, needed_expertise);
                 Console.WriteLine("Input LawyerId");
                 string input_lid = Console.ReadLine();
 
                 foreach (Lawyer l in list_of_lawyers)
                 {
-                    if (l.EmployeeId == input_lid)
+                    if (l.EmployeeId == input_lid && l.Specialization == needed_expertise)
                     {
                         return input_lid;
                     }
@@ -197,7 +208,7 @@ namespace third
                 input_appointment.Id = Console.ReadLine();
 
                 input_appointment.ClientId = input_valid_id(current_clients);
-                input_appointment.LawyerId = input_valid_id(firm_lawyers);
+                input_appointment.LawyerId = input_valid_id(firm_lawyers, current_clients, input_appointment.ClientId);
 
 
                 Console.WriteLine("Input DateTime");
@@ -248,7 +259,7 @@ namespace third
                 Console.WriteLine("Input TotalCharges");
                 input_case.TotalCharges = Console.ReadLine();
 
-                input_case.LawyerId = input_valid_id(firm_lawyers);
+                input_case.LawyerId = input_valid_id(firm_lawyers, current_clients, input_case.ClientId);
 
                 Console.WriteLine("Input SituationDescription");
                 input_case.SituationDescription = Console.ReadLine();
@@ -275,70 +286,105 @@ namespace third
 
         public void displayListContents(List<Client> list_of_clients)
         {
-            Console.WriteLine(new string('.', 111));
-            Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", "ClientId", "FirstName", "MiddleName", "LastName", "DOB", "CaseType", "Street", "Street_Nr", "Zip", "City"));
-            Console.WriteLine(new string('.', 111));
-
-            foreach (Client c in list_of_clients)
+            if (list_of_clients.Any())
             {
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", c.ClientId, c.FirstName, c.MiddleName, c.LastName, c.DOB, c.CaseType, c.Street, c.Street_Nr, c.Zip, c.City));
                 Console.WriteLine(new string('.', 111));
+                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", "ClientId", "FirstName", "MiddleName", "LastName", "DOB", "CaseType", "Street", "Street_Nr", "Zip", "City"));
+                Console.WriteLine(new string('.', 111));
+
+                foreach (Client c in list_of_clients)
+                {
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", c.ClientId, c.FirstName, c.MiddleName, c.LastName, c.DOB, c.CaseType, c.Street, c.Street_Nr, c.Zip, c.City));
+                    Console.WriteLine(new string('.', 111));
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no registered cases");
             }
         }
 
         public void displayListContents(List<Case> list_of_cases)
         {
-            Console.WriteLine(new string('.', 100));
-            Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.", "T.Charges", "LawyerId", "Sit.Desc.", "OtherNotes"));
-            Console.WriteLine(new string('.', 100));
-
-            foreach (Case c in list_of_cases)
+            if (list_of_cases.Any())
             {
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|", c.Id, c.ClientId, c.CaseType, c.StartDate, c.ExpectedProcessDuration, c.TotalCharges, c.LawyerId, c.SituationDescription, c.OtherNotes));
                 Console.WriteLine(new string('.', 100));
+                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.", "T.Charges", "LawyerId", "Sit.Desc.", "OtherNotes"));
+                Console.WriteLine(new string('.', 100));
+
+                foreach (Case c in list_of_cases)
+                {
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|", c.Id, c.ClientId, c.CaseType, c.StartDate, c.ExpectedProcessDuration, c.TotalCharges, c.LawyerId, c.SituationDescription, c.OtherNotes));
+                    Console.WriteLine(new string('.', 100));
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no registered cases");
             }
         }
 
 
         public void displayListContents(List<Appointment> list_of_appointments)
         {
-            Console.WriteLine(new string('.', 67));
-            Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", "Id", "ClientId", "LawyerId", "DateTime", "MeetingRoom", "ShortDescription"));
-            Console.WriteLine(new string('.', 67));
-
-            foreach (Appointment a in list_of_appointments)
+            if (list_of_appointments.Any())
             {
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", a.Id, a.ClientId, a.LawyerId, a.DateTime, a.MeetingRoom, a.ShortDescription));
                 Console.WriteLine(new string('.', 67));
+                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", "Id", "ClientId", "LawyerId", "DateTime", "MeetingRoom", "ShortDescription"));
+                Console.WriteLine(new string('.', 67));
+
+                foreach (Appointment a in list_of_appointments)
+                {
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", a.Id, a.ClientId, a.LawyerId, a.DateTime, a.MeetingRoom, a.ShortDescription));
+                    Console.WriteLine(new string('.', 67));
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no registered lawyers");
             }
         }
 
         public void displayListContents(List<Lawyer> list_of_lawyers)
         {
-            Console.WriteLine(new string('.', 113));
-            Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "JoinDate", "OtherExp."));
-            Console.WriteLine(new string('.', 113));
-
-            foreach (Lawyer l in list_of_lawyers)
+            if (list_of_lawyers.Any())
             {
-                Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
                 Console.WriteLine(new string('.', 113));
+                Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "JoinDate", "OtherExp."));
+                Console.WriteLine(new string('.', 113));
+
+                foreach (Lawyer l in list_of_lawyers)
+                {
+                    Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
+                    Console.WriteLine(new string('.', 113));
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no registered lawyers");
             }
         }
 
         public void displayListContents(List<Lawyer> list_of_lawyers, ECaseType specialization)
         {
-            Console.WriteLine(new string('.', 113));
-            Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "JoinDate", "OtherExp."));
-            Console.WriteLine(new string('.', 113));
-
-            foreach (Lawyer l in list_of_lawyers)
+            if (list_of_lawyers.Any())
             {
-                if (l.Specialization == specialization)
+                Console.WriteLine(new string('.', 113));
+                Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", "Emp.ID", "Name", "DOB", "YOE", "Specializ.", "JoinDate", "OtherExp."));
+                Console.WriteLine(new string('.', 113));
+
+                foreach (Lawyer l in list_of_lawyers)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
-                    Console.WriteLine(new string('.', 113));
+                    if (l.Specialization == specialization)
+                    {
+                        Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
+                        Console.WriteLine(new string('.', 113));
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine("There are no registered lawyers");
             }
         }
 
