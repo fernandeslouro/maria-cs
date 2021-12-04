@@ -90,7 +90,7 @@ namespace third
         }
 
 
-        public string input_valid_id(List<Client> list_of_clients)
+        public string input_valid_clientid(List<Client> list_of_clients)
         {
             while (true)
             {
@@ -109,7 +109,7 @@ namespace third
             }
         }
 
-        public string input_valid_id(List<Lawyer> list_of_lawyers, List<Client> list_of_clients, string input_client_id)
+        public string input_valid_lawyerid(List<Lawyer> list_of_lawyers, List<Client> list_of_clients, string input_client_id)
         {
 
             ECaseType needed_expertise = ECaseType.Corporate; // placeholder value
@@ -207,8 +207,8 @@ namespace third
                 Console.WriteLine("Input the Id of the new Appointment");
                 input_appointment.Id = Console.ReadLine();
 
-                input_appointment.ClientId = input_valid_id(current_clients);
-                input_appointment.LawyerId = input_valid_id(firm_lawyers, current_clients, input_appointment.ClientId);
+                input_appointment.ClientId = input_valid_clientid(current_clients);
+                input_appointment.LawyerId = input_valid_lawyerid(firm_lawyers, current_clients, input_appointment.ClientId);
 
 
                 Console.WriteLine("Input DateTime");
@@ -223,7 +223,7 @@ namespace third
 
                 displayListContents(new List<Appointment> { input_appointment });
 
-                Console.WriteLine("\nIs it Correct? (y/N)");
+                Cnputonsole.WriteLine("\nIs it Correct? (y/N)");
                 correct_string = Console.ReadLine();
                 if (correct_string == "y")
                 {
@@ -246,9 +246,9 @@ namespace third
             while (!correct)
             {
                 Console.WriteLine("Input the Id of the new Case");
-                input_case.Id = Console.ReadLine();
+                input_case.Id = Console.ReadLine()
 
-                input_case.ClientId = input_valid_id(current_clients);
+                input_case.ClientId = input_valid_clientid(current_clients);
 
                 Console.WriteLine("Input StartDate");
                 input_case.StartDate = Console.ReadLine();
@@ -259,7 +259,7 @@ namespace third
                 Console.WriteLine("Input TotalCharges");
                 input_case.TotalCharges = Console.ReadLine();
 
-                input_case.LawyerId = input_valid_id(firm_lawyers, current_clients, input_case.ClientId);
+                input_case.LawyerId = input_valid_lawyerid(firm_lawyers, current_clients, input_case.ClientId);
 
                 Console.WriteLine("Input SituationDescription");
                 input_case.SituationDescription = Console.ReadLine();
@@ -300,7 +300,7 @@ namespace third
             }
             else
             {
-                Console.WriteLine("There are no registered cases");
+                Console.WriteLine("\nThere are no registered clients\n");
             }
         }
 
@@ -320,7 +320,7 @@ namespace third
             }
             else
             {
-                Console.WriteLine("There are no registered cases");
+                Console.WriteLine("\nThere are no registered cases\n");
             }
         }
 
@@ -341,7 +341,7 @@ namespace third
             }
             else
             {
-                Console.WriteLine("There are no registered lawyers");
+                Console.WriteLine("\nThere are no scheduled appointments\n");
             }
         }
 
@@ -361,7 +361,7 @@ namespace third
             }
             else
             {
-                Console.WriteLine("There are no registered lawyers");
+                Console.WriteLine("\nThere are no registered lawyers\n");
             }
         }
 
@@ -384,7 +384,7 @@ namespace third
             }
             else
             {
-                Console.WriteLine("There are no registered lawyers");
+                Console.WriteLine("\nThere are no registered lawyers\n");
             }
         }
 
