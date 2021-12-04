@@ -13,6 +13,8 @@ namespace third
 
         public bool allow_access(string user_type)
         {
+            return true; //do not ask password while developing
+            Console.Write("\n");
             Console.WriteLine("Input your username:");
             string input_user = Console.ReadLine();
             Console.WriteLine("Input your password:");
@@ -30,30 +32,36 @@ namespace third
                 case "receptionist":
                     if (input_user == receptionist_user && input_password == receptionist_password)
                     {
+                        Console.WriteLine("\nThe password is correct.\n");
                         return true;
                     }
                     else
                     {
+                        Console.WriteLine("\nWrong Password.\n");
                         return false;
                     }
                     break;
                 case "lawyer":
                     if (input_user == lawyer_user && input_password == lawyer_password)
                     {
+                        Console.WriteLine("\nThe password is correct.\n");
                         return true;
                     }
                     else
                     {
+                        Console.WriteLine("\nWrong Password.\n");
                         return false;
                     }
                     break;
                 case "admin":
                     if (input_user == admin_user && input_password == admin_password)
                     {
+                        Console.WriteLine("\nThe password is correct.\n");
                         return true;
                     }
                     else
                     {
+                        Console.WriteLine("\nWrong Password.\n");
                         return false;
                     }
                     break;
