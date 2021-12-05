@@ -7,7 +7,6 @@ namespace third
 
     public abstract class Staff
     {
-
         public string EmployeeId;
         public string EmployeeName;
         public string OtherExpertise;

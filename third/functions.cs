@@ -102,7 +102,7 @@ namespace third
                     {
                         if (c.ClientId == input_cid)
                         {
-                            Console.WriteLine("There is already a Client registered with this ID");
+                            Console.WriteLine("\nThere is already a Client registered with this ID\n");
                             found_repeated = true;
                             break;
                         }
@@ -117,7 +117,7 @@ namespace third
             while (true)
             {
                 displayListContents(list_of_clients);
-                Console.WriteLine("Input ClientId");
+                Console.WriteLine("\nInput ClientId. Above you can see a list the registered clients.");
                 string input_cid = Console.ReadLine();
 
                 foreach (Client c in list_of_clients)
@@ -127,7 +127,7 @@ namespace third
                         return input_cid;
                     }
                 }
-                Console.WriteLine("Input the ClientId from one of the available clients");
+                Console.WriteLine("\nThe ID you selected does not correspond to any of the registered clients\n");
             }
         }
 
@@ -148,7 +148,7 @@ namespace third
             while (true)
             {
                 displayListContents(list_of_lawyers, needed_expertise);
-                Console.WriteLine("Input LawyerId");
+                Console.WriteLine($"Input LawyerId. Above you can see the list of the layers with the required expertise ({needed_expertise})");
                 string input_lid = Console.ReadLine();
 
                 foreach (Lawyer l in list_of_lawyers)
@@ -158,7 +158,7 @@ namespace third
                         return input_lid;
                     }
                 }
-                Console.WriteLine("Input the LawyerId from one of the available lawyers");
+                Console.WriteLine("\nThe ID you selected does not correspond to one of the recommended lawers\n");
             }
         }
 
@@ -313,6 +313,7 @@ namespace third
                 input_appointment.Id = input_valid_appointmentid(list_of_appointments);
 
                 input_appointment.ClientId = input_valid_clientid(current_clients);
+
                 input_appointment.LawyerId = input_valid_lawyerid(firm_lawyers, current_clients, input_appointment.ClientId);
 
                 input_appointment.DateTime = input_valid_date(true);
@@ -394,7 +395,7 @@ namespace third
 
                 foreach (Client c in list_of_clients)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", c.ClientId.Truncate(10), c.FirstName.Truncate(10), c.MiddleName.Truncate(10), c.LastName.Truncate(10), c.DOB.ToShortDateString(), c.CaseType, c.Street.Truncate(10), c.Street_Nr.Truncate(10), c.Zip.Truncate(10), c.City.Truncate(10)));
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", Truncate(c.ClientId, 10), Truncate(c.FirstName, 10), Truncate(c.MiddleName, 10), Truncate(c.LastName, 10), c.DOB.ToShortDateString(), c.CaseType, Truncate(c.Street, 10), Truncate(c.Street_Nr, 10), Truncate(c.Zip, 10), Truncate(c.City, 10)));
                     Console.WriteLine(new string('.', 111));
                 }
             }
@@ -414,7 +415,7 @@ namespace third
 
                 foreach (Case c in list_of_cases)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,18}|{5,12}|{6,10}|{7,25}|{8,20}|", c.Id.Truncate(10), c.ClientId.Truncate(10), c.CaseType, c.StartDate.ToShortDateString(), c.ExpectedProcessDuration.ToString().Truncate(10), c.TotalCharges.ToString().Truncate(10), c.LawyerId.Truncate(10), c.SituationDescription.Truncate(25), c.OtherNotes.Truncate(20)));
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,18}|{5,12}|{6,10}|{7,25}|{8,20}|", Truncate(c.Id, 10), Truncate(c.ClientId, 10), c.CaseType, c.StartDate.ToShortDateString(), Truncate(c.ExpectedProcessDuration.ToString(), 10), Truncate(c.TotalCharges.ToString(), 10), Truncate(c.LawyerId,10), Truncate(c.SituationDescription, 25), Truncate(c.OtherNotes,20)));
                     Console.WriteLine(new string('.', 135));
                 }
             }
@@ -435,7 +436,7 @@ namespace third
 
                 foreach (Appointment a in list_of_appointments)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,22}|{4,11}|{5,25}|", a.Id.Truncate(10), a.ClientId.Truncate(10), a.LawyerId.Truncate(10), a.DateTime, a.MeetingRoom, a.ShortDescription.Truncate(25)));
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,22}|{4,11}|{5,25}|", Truncate(a.Id,10), Truncate(a.ClientId, 10), Truncate(a.LawyerId, 10), a.DateTime, a.MeetingRoom, Truncate(a.ShortDescription, 25)));
                     Console.WriteLine(new string('.', 95));
                 }
             }
@@ -455,7 +456,7 @@ namespace third
 
                 foreach (Lawyer l in list_of_lawyers)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,20}|", l.EmployeeId.Truncate(10), l.EmployeeName.Truncate(20), l.DOB.ToShortDateString(), l.YearsofExperience, l.Specialization, l.JoinedDate.ToShortDateString(), l.OtherExpertise.Truncate(20)));
+                    Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,20}|", Truncate(l.EmployeeId,10), Truncate(l.EmployeeName, 20), l.DOB.ToShortDateString(), l.YearsofExperience, l.Specialization, l.JoinedDate.ToShortDateString(), Truncate(l.OtherExpertise,20)));
                     Console.WriteLine(new string('.', 113));
                 }
             }
@@ -488,15 +489,20 @@ namespace third
             }
         }
 
-
+        public string Truncate(string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength - 1) + ".";
+        }
 
     }
+    /*
     public static class StringExt
     {
         public static string Truncate(this string value, int maxLength)
         {
             if (string.IsNullOrEmpty(value)) return value;
-            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength - 1) + ".";
         }
-    }
+    }*/
 }
