@@ -65,8 +65,8 @@ namespace third
         public string LawyerId;
         public ECaseType CaseType;
         public DateTime StartDate;
-        public string ExpectedProcessDuration;
-        public string TotalCharges;
+        public int ExpectedProcessDuration;
+        public int TotalCharges;
         public string SituationDescription;
         public string OtherNotes;
     }

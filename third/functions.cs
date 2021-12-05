@@ -284,6 +284,23 @@ namespace third
             }
         }
 
+        public int input_valid_integer(string prompt)
+        {
+            int input_integer;
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine(prompt);
+                    input_integer = int.Parse(Console.ReadLine());
+                    return input_integer;
+                }
+                catch
+                {
+                    Console.WriteLine("\nInput a valid number\n");
+                }
+            }
+        }
 
         public List<Appointment> AddNewAppointment(List<Appointment> list_of_appointments, List<Lawyer> firm_lawyers, List<Client> current_clients)
         {
@@ -338,10 +355,9 @@ namespace third
                 input_case.StartDate = input_valid_date();
 
                 Console.WriteLine("Input ExpectedProcessDuration");
-                input_case.ExpectedProcessDuration = Console.ReadLine();
+                input_case.ExpectedProcessDuration = input_valid_integer("Input the expected process duration (hours)");
 
-                Console.WriteLine("Input TotalCharges");
-                input_case.TotalCharges = Console.ReadLine();
+                input_case.TotalCharges = input_valid_integer("Input the total charges ($)");
 
                 input_case.LawyerId = input_valid_lawyerid(firm_lawyers, current_clients, input_case.ClientId);
 
@@ -392,14 +408,14 @@ namespace third
         {
             if (list_of_cases.Any())
             {
-                Console.WriteLine(new string('.', 125));
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,25}|{8,20}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.", "T.Charges", "LawyerId", "Sit.Desc.", "OtherNotes"));
-                Console.WriteLine(new string('.', 125));
+                Console.WriteLine(new string('.', 135));
+                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,18}|{5,12}|{6,10}|{7,25}|{8,20}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.(months)", "T.Charges($)", "LawyerId", "Sit.Desc.", "OtherNotes"));
+                Console.WriteLine(new string('.', 135));
 
                 foreach (Case c in list_of_cases)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,25}|{8,20}|", c.Id.Truncate(10), c.ClientId.Truncate(10), c.CaseType, c.StartDate.ToShortDateString(), c.ExpectedProcessDuration.Truncate(10), c.TotalCharges.Truncate(10), c.LawyerId.Truncate(10), c.SituationDescription.Truncate(25), c.OtherNotes.Truncate(20)));
-                    Console.WriteLine(new string('.', 125));
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,18}|{5,12}|{6,10}|{7,25}|{8,20}|", c.Id.Truncate(10), c.ClientId.Truncate(10), c.CaseType, c.StartDate.ToShortDateString(), c.ExpectedProcessDuration.ToString().Truncate(10), c.TotalCharges.ToString().Truncate(10), c.LawyerId.Truncate(10), c.SituationDescription.Truncate(25), c.OtherNotes.Truncate(20)));
+                    Console.WriteLine(new string('.', 135));
                 }
             }
             else
