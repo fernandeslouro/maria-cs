@@ -11,7 +11,7 @@ namespace third
         public string EmployeeId;
         public string EmployeeName;
         public string OtherExpertise;
-        public string JoinedDate;
+        public DateTime JoinedDate;
     }
 
 
@@ -27,7 +27,7 @@ namespace third
 
     public class Lawyer : Staff
     {
-        public string DOB;
+        public DateTime DOB;
         public string YearsofExperience;
         public ECaseType Specialization;
     }
@@ -39,7 +39,7 @@ namespace third
         public string FirstName;
         public string MiddleName;
         public string LastName;
-        public string DOB;
+        public DateTime DOB;
         public ECaseType CaseType;
         public string Street;
         public string Street_Nr;
@@ -52,7 +52,7 @@ namespace third
         public string ClientId;
         public string LawyerId;
         public string Id;
-        public string DateTime;
+        public DateTime DateTime;
         public EMeetingRoom MeetingRoom;
         public string ShortDescription;
     }
@@ -64,13 +64,12 @@ namespace third
         public string ClientId;
         public string LawyerId;
         public ECaseType CaseType;
-        public string StartDate;
+        public DateTime StartDate;
         public string ExpectedProcessDuration;
         public string TotalCharges;
         public string SituationDescription;
         public string OtherNotes;
     }
-
 
 
 

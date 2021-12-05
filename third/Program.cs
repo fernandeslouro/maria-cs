@@ -80,7 +80,7 @@ namespace third
             while (!all_finished)
             {
                 /* When the application starts it presents three options 1. Lawyer 2. Admin 3. Receptionist */
-                Console.WriteLine("Choose between:");
+                Console.WriteLine("\nChoose between:");
                 Console.WriteLine(" 1. Receptionist");
                 Console.WriteLine(" 2. Lawyer");
                 Console.WriteLine(" 3. Admin");
@@ -110,7 +110,7 @@ namespace third
 
                             while (!finished)
                             {
-                                Console.WriteLine("Choose between the possible options for recptionists:");
+                                Console.WriteLine("\nChoose between the possible options for receptionists:");
                                 Console.WriteLine(" 1. Register a new client");
                                 Console.WriteLine(" 2. Add a new appointment");
                                 Console.WriteLine(" 3. List all appointments");
@@ -159,7 +159,7 @@ namespace third
                             string lawyer_option;
                             while (!finished)
                             {
-                                Console.WriteLine("Choose between the possible options for Lawyers:");
+                                Console.WriteLine("\nChoose between the possible options for Lawyers:");
                                 Console.WriteLine(" 1. List all cases");
                                 Console.WriteLine(" 2. Add a new case");
                                 Console.WriteLine(" 3. List all appointments");
@@ -206,7 +206,7 @@ namespace third
 
                             while (!finished)
                             {
-                                Console.WriteLine("Choose between the possible options for Admins:");
+                                Console.WriteLine("\nChoose between the possible options for Admins:");
                                 Console.WriteLine(" 1. List all cases");
                                 Console.WriteLine(" 2. List all appointments");
                                 Console.WriteLine(" 3. Exit");

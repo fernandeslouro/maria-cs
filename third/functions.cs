@@ -22,11 +22,11 @@ namespace third
 
                 l.EmployeeId = columns[0];
                 l.EmployeeName = columns[1];
-                l.DOB = columns[2];
+                l.DOB = DateTime.ParseExact(columns[2], "yyyy-MM-dd", null);
                 l.YearsofExperience = columns[3];
                 // Parsing the string into the enum type
                 l.Specialization = (ECaseType)Enum.Parse(typeof(ECaseType), columns[4], true);
-                l.JoinedDate = columns[5];
+                l.JoinedDate = DateTime.ParseExact(columns[5], "yyyy-MM-dd", null);
                 l.OtherExpertise = columns[6];
 
                 lawyers.Add(l);
@@ -44,8 +44,7 @@ namespace third
 
             while (!correct)
             {
-                Console.WriteLine("Input the Id of the new Client");
-                input_client.ClientId = Console.ReadLine();
+                input_client.ClientId = input_valid_clientid(list_of_clients, true);
 
                 Console.WriteLine("Input FirstName");
                 input_client.FirstName = Console.ReadLine();
@@ -56,8 +55,7 @@ namespace third
                 Console.WriteLine("Input Lastname");
                 input_client.LastName = Console.ReadLine();
 
-                Console.WriteLine("Input DOB");
-                input_client.DOB = Console.ReadLine();
+                input_client.DOB = input_valid_date();
 
                 input_client.CaseType = input_valid_casetype();
 
@@ -90,8 +88,32 @@ namespace third
         }
 
 
-        public string input_valid_clientid(List<Client> list_of_clients)
+        public string input_valid_clientid(List<Client> list_of_clients, bool registration = false)
         {
+            if (registration)
+            {
+                bool found_repeated;
+                while (true)
+                {
+                    Console.WriteLine("Input ClientId");
+                    string input_cid = Console.ReadLine();
+                    found_repeated = false;
+                    foreach (Client c in list_of_clients)
+                    {
+                        if (c.ClientId == input_cid)
+                        {
+                            Console.WriteLine("There is already a Client registered with this ID");
+                            found_repeated = true;
+                            break;
+                        }
+                    }
+                    if (!found_repeated)
+                    {
+                        return input_cid;
+                    }
+                }
+            }
+
             while (true)
             {
                 displayListContents(list_of_clients);
@@ -141,6 +163,53 @@ namespace third
         }
 
 
+        public string input_valid_appointmentid(List<Appointment> list_of_appointments)
+        {
+            bool found_repeated;
+            while (true)
+            {
+                Console.WriteLine("Input the ID of the new appointment");
+                string input_aid = Console.ReadLine();
+                found_repeated = false;
+                foreach (Appointment a in list_of_appointments)
+                {
+                    if (a.Id == input_aid)
+                    {
+                        Console.WriteLine("\nThere is already an Appointment registered with this ID\n");
+                        found_repeated = true;
+                        break;
+                    }
+                }
+                if (!found_repeated)
+                {
+                    return input_aid;
+                }
+            }
+        }
+
+        public string input_valid_caseid(List<Case> list_of_cases)
+        {
+            bool found_repeated;
+            while (true)
+            {
+                Console.WriteLine("Input the ID of the new Case");
+                string input_cid = Console.ReadLine();
+                found_repeated = false;
+                foreach (Case c in list_of_cases)
+                {
+                    if (c.Id == input_cid)
+                    {
+                        Console.WriteLine("\nThere is already a Case registered with this ID\n");
+                        found_repeated = true;
+                        break;
+                    }
+                }
+                if (!found_repeated)
+                {
+                    return input_cid;
+                }
+            }
+        }
 
         public ECaseType input_valid_casetype()
         {
@@ -187,12 +256,32 @@ namespace third
             }
         }
 
-        public void input_valid_date(bool includeTime)
+        public DateTime input_valid_date(bool includeTime = false)
         {
-            // TODO: Implement protection for dates
-            Console.WriteLine("Input DateTime");
-            //input_appointment.DateTime = Console.ReadLine();
+            while (true)
+            {
+                DateTime input_datetime;
+                try
+                {
+                    if (!includeTime)
+                    {
+                        Console.WriteLine("Input Date (yyyy-mm-dd)");
+                        input_datetime = DateTime.ParseExact(Console.ReadLine(), "yyyy-MM-dd", null);
+                        return input_datetime;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Input Date and Time (yyyy-mm-dd HH:MM)");
+                        input_datetime = DateTime.ParseExact(Console.ReadLine(), "yyyy-MM-dd HH:mm", null);
+                        return input_datetime;
 
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("\nInput a valid date\n");
+                }
+            }
         }
 
 
@@ -204,15 +293,12 @@ namespace third
 
             while (!correct)
             {
-                Console.WriteLine("Input the Id of the new Appointment");
-                input_appointment.Id = Console.ReadLine();
+                input_appointment.Id = input_valid_appointmentid(list_of_appointments);
 
                 input_appointment.ClientId = input_valid_clientid(current_clients);
                 input_appointment.LawyerId = input_valid_lawyerid(firm_lawyers, current_clients, input_appointment.ClientId);
 
-
-                Console.WriteLine("Input DateTime");
-                input_appointment.DateTime = Console.ReadLine();
+                input_appointment.DateTime = input_valid_date(true);
 
                 input_appointment.MeetingRoom = input_valid_meetingRoom();
 
@@ -223,7 +309,7 @@ namespace third
 
                 displayListContents(new List<Appointment> { input_appointment });
 
-                Cnputonsole.WriteLine("\nIs it Correct? (y/N)");
+                Console.WriteLine("\nIs it Correct? (y/N)");
                 correct_string = Console.ReadLine();
                 if (correct_string == "y")
                 {
@@ -245,13 +331,11 @@ namespace third
 
             while (!correct)
             {
-                Console.WriteLine("Input the Id of the new Case");
-                input_case.Id = Console.ReadLine()
+                input_case.Id = input_valid_caseid(list_of_cases);
 
                 input_case.ClientId = input_valid_clientid(current_clients);
 
-                Console.WriteLine("Input StartDate");
-                input_case.StartDate = Console.ReadLine();
+                input_case.StartDate = input_valid_date();
 
                 Console.WriteLine("Input ExpectedProcessDuration");
                 input_case.ExpectedProcessDuration = Console.ReadLine();
@@ -294,7 +378,7 @@ namespace third
 
                 foreach (Client c in list_of_clients)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", c.ClientId, c.FirstName, c.MiddleName, c.LastName, c.DOB, c.CaseType, c.Street, c.Street_Nr, c.Zip, c.City));
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|{9,10}|", c.ClientId.Truncate(10), c.FirstName.Truncate(10), c.MiddleName.Truncate(10), c.LastName.Truncate(10), c.DOB.ToShortDateString(), c.CaseType, c.Street.Truncate(10), c.Street_Nr.Truncate(10), c.Zip.Truncate(10), c.City.Truncate(10)));
                     Console.WriteLine(new string('.', 111));
                 }
             }
@@ -309,12 +393,12 @@ namespace third
             if (list_of_cases.Any())
             {
                 Console.WriteLine(new string('.', 100));
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.", "T.Charges", "LawyerId", "Sit.Desc.", "OtherNotes"));
+                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,25}|{8,20}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.", "T.Charges", "LawyerId", "Sit.Desc.", "OtherNotes"));
                 Console.WriteLine(new string('.', 100));
 
                 foreach (Case c in list_of_cases)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,10}|{8,10}|", c.Id, c.ClientId, c.CaseType, c.StartDate, c.ExpectedProcessDuration, c.TotalCharges, c.LawyerId, c.SituationDescription, c.OtherNotes));
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,25}|{8,20}|", c.Id.Truncate(10), c.ClientId.Truncate(10), c.CaseType, c.StartDate.ToShortDateString(), c.ExpectedProcessDuration.Truncate(10), c.TotalCharges.Truncate(10), c.LawyerId.Truncate(10), c.SituationDescription.Truncate(25), c.OtherNotes.Truncate(20)));
                     Console.WriteLine(new string('.', 100));
                 }
             }
@@ -330,12 +414,12 @@ namespace third
             if (list_of_appointments.Any())
             {
                 Console.WriteLine(new string('.', 67));
-                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", "Id", "ClientId", "LawyerId", "DateTime", "MeetingRoom", "ShortDescription"));
+                Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,22}|{4,11}|{5,25}|", "Id", "ClientId", "LawyerId", "DateTime", "MeetingRoom", "ShortDescription"));
                 Console.WriteLine(new string('.', 67));
 
                 foreach (Appointment a in list_of_appointments)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|", a.Id, a.ClientId, a.LawyerId, a.DateTime, a.MeetingRoom, a.ShortDescription));
+                    Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,22}|{4,11}|{5,25}|", a.Id.Truncate(10), a.ClientId.Truncate(10), a.LawyerId.Truncate(10), a.DateTime, a.MeetingRoom, a.ShortDescription.Truncate(25)));
                     Console.WriteLine(new string('.', 67));
                 }
             }
@@ -355,7 +439,7 @@ namespace third
 
                 foreach (Lawyer l in list_of_lawyers)
                 {
-                    Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
+                    Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,20}|", l.EmployeeId.Truncate(10), l.EmployeeName.Truncate(20), l.DOB.ToShortDateString(), l.YearsofExperience, l.Specialization, l.JoinedDate.ToShortDateString(), l.OtherExpertise.Truncate(20)));
                     Console.WriteLine(new string('.', 113));
                 }
             }
@@ -377,7 +461,7 @@ namespace third
                 {
                     if (l.Specialization == specialization)
                     {
-                        Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB, l.YearsofExperience, l.Specialization, l.JoinedDate, l.OtherExpertise));
+                        Console.WriteLine(String.Format("|{0,10}|{1,20}|{2,10}|{3,10}|{4,15}|{5,10}|{6,30}|", l.EmployeeId, l.EmployeeName, l.DOB.ToShortDateString(), l.YearsofExperience, l.Specialization, l.JoinedDate.ToShortDateString(), l.OtherExpertise));
                         Console.WriteLine(new string('.', 113));
                     }
                 }
@@ -390,5 +474,13 @@ namespace third
 
 
 
+    }
+    public static class StringExt
+    {
+        public static string Truncate(this string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
     }
 }
