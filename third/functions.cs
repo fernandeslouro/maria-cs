@@ -392,14 +392,14 @@ namespace third
         {
             if (list_of_cases.Any())
             {
-                Console.WriteLine(new string('.', 100));
+                Console.WriteLine(new string('.', 125));
                 Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,25}|{8,20}|", "Id", "ClientId", "CaseType", "StartDate", "Ex.Pr.Dur.", "T.Charges", "LawyerId", "Sit.Desc.", "OtherNotes"));
-                Console.WriteLine(new string('.', 100));
+                Console.WriteLine(new string('.', 125));
 
                 foreach (Case c in list_of_cases)
                 {
                     Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,10}|{4,10}|{5,10}|{6,10}|{7,25}|{8,20}|", c.Id.Truncate(10), c.ClientId.Truncate(10), c.CaseType, c.StartDate.ToShortDateString(), c.ExpectedProcessDuration.Truncate(10), c.TotalCharges.Truncate(10), c.LawyerId.Truncate(10), c.SituationDescription.Truncate(25), c.OtherNotes.Truncate(20)));
-                    Console.WriteLine(new string('.', 100));
+                    Console.WriteLine(new string('.', 125));
                 }
             }
             else
@@ -413,14 +413,14 @@ namespace third
         {
             if (list_of_appointments.Any())
             {
-                Console.WriteLine(new string('.', 67));
+                Console.WriteLine(new string('.', 95));
                 Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,22}|{4,11}|{5,25}|", "Id", "ClientId", "LawyerId", "DateTime", "MeetingRoom", "ShortDescription"));
-                Console.WriteLine(new string('.', 67));
+                Console.WriteLine(new string('.', 95));
 
                 foreach (Appointment a in list_of_appointments)
                 {
                     Console.WriteLine(String.Format("|{0,10}|{1,10}|{2,10}|{3,22}|{4,11}|{5,25}|", a.Id.Truncate(10), a.ClientId.Truncate(10), a.LawyerId.Truncate(10), a.DateTime, a.MeetingRoom, a.ShortDescription.Truncate(25)));
-                    Console.WriteLine(new string('.', 67));
+                    Console.WriteLine(new string('.', 95));
                 }
             }
             else
